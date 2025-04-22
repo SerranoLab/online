@@ -1,0 +1,26 @@
+extends structure/_layout.pug
+
+block header
+
+  h1.center Contact Us
+
+block content
+
+  main.site-content.max
+
+    form
+
+      div
+        label(for="name") Name
+        input(type="text" id="name" name="name")
+        
+      div
+        label(for="email") Email
+        input(type="text" id="email" name="email")
+        
+      div
+        label(for="message") Message
+        textarea(id="message" name="message")
+        
+      div
+        input(type="submit" class="button" value="Submit Message")

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <title>The Serrano Lab</title>
@@ -7,16 +8,10 @@
 
   <!-- Google Fonts (Raleway & Open Sans) -->
   <link rel="preconnect" href="https://fonts.gstatic.com" />
-  <link
-    href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;500;700&family=Open+Sans:wght@400;600&display=swap"
-    rel="stylesheet"
-  />
+  <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;500;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet" />
 
   <!-- Font Awesome (for icons) -->
-  <link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
-  />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
 
   <!-- Inline CSS -->
   <style>
@@ -26,6 +21,7 @@
       padding: 0;
       box-sizing: border-box;
     }
+
     body {
       font-family: 'Raleway', sans-serif;
       background-color: #ffffff;
@@ -33,19 +29,35 @@
       line-height: 1.6;
       overflow-x: hidden;
     }
+
     a {
       text-decoration: none;
       color: inherit;
     }
+
     ul {
       list-style: none;
+      margin: 0;
+      padding: 0;
     }
-    h1, h2, h3, h4 {
+
+    h1,
+    h2,
+    h3,
+    h4 {
       font-weight: 700;
       margin-bottom: 0.5rem;
     }
+
     p {
       margin-bottom: 1rem;
+    }
+
+    /* Container utility for centering and max width */
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 3rem 1rem;
     }
 
     /* -------------------- HEADER & NAV -------------------- */
@@ -54,9 +66,10 @@
       top: 0;
       width: 100%;
       background: #ffffff;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
       z-index: 999;
     }
+
     nav {
       display: flex;
       align-items: center;
@@ -65,25 +78,29 @@
       max-width: 1200px;
       margin: 0 auto;
     }
+
     .nav__logo img {
-      /* Make logo bigger here */
-      height: 90px; 
+      height: 130px;
       width: auto;
     }
+
     .nav__links {
       display: flex;
       align-items: center;
     }
+
     .nav__links li {
       margin-left: 1.5rem;
     }
+
     .nav__link {
       color: #333;
       font-weight: 500;
       transition: color 0.3s ease;
     }
+
     .nav__link:hover {
-      color: #1F74AF; /* Serrano Lab primary blue */
+      color: #1F74AF;
     }
 
     /* -------------------- NICE BUTTON STYLES (Orange Gradient) -------------------- */
@@ -99,9 +116,11 @@
       cursor: pointer;
       text-align: center;
     }
+
     .btn:hover {
       filter: brightness(0.9);
     }
+
     .btn--primary {
       display: inline-block;
       padding: 0.6rem 1.2rem;
@@ -113,6 +132,7 @@
       transition: all 0.3s ease;
       cursor: pointer;
     }
+
     .btn--primary:hover {
       filter: brightness(0.9);
     }
@@ -129,36 +149,41 @@
       text-align: center;
       overflow: hidden;
     }
-    /* Use the same background image from your previous code for the parallax. */
+
     .hero::before {
       content: "";
       position: absolute;
-      top: 0; left: 0;
+      top: 0;
+      left: 0;
       width: 100%;
       height: 100%;
-      background: url('https://raw.githubusercontent.com/SerranoLab/online/refs/heads/main/Serrano%20Lab%202023.jpg') 
-                  center/cover no-repeat;
+      background: url('https://raw.githubusercontent.com/SerranoLab/online/refs/heads/main/Serrano%20Lab%202023.jpg') center/cover no-repeat;
       will-change: transform;
-      z-index: -1; /* behind content */
+      z-index: -1;
     }
-    /* Revert to the previous black overlay with .35 opacity. */
+
     .hero__overlay {
       position: absolute;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
       background: rgba(0, 0, 0, 0.35);
       z-index: 0;
     }
+
     .hero__content {
       position: relative;
       z-index: 1;
       max-width: 800px;
       padding: 0 1rem;
     }
+
     .hero__title {
       font-size: 3rem;
       margin-bottom: 1rem;
     }
+
     .hero__subtitle {
       font-size: 1.25rem;
       margin-bottom: 2rem;
@@ -170,15 +195,18 @@
 
     /* -------------------- MISSION / VALUES -------------------- */
     .values {
+      width: 100%;
       background-color: #f8f8f8;
-      padding: 3rem 1rem;
       text-align: center;
     }
-    .values h2 {
+
+    .values .container h2 {
       color: #1F74AF;
       font-size: 2rem;
       margin-bottom: 1.5rem;
+      text-align: center;
     }
+
     .values__list {
       display: flex;
       flex-wrap: wrap;
@@ -186,44 +214,42 @@
       max-width: 1000px;
       margin: 0 auto;
     }
+
     .values__list li {
       background: #fff;
       margin: 0.5rem;
       padding: 0.7rem 1.2rem;
       border-radius: 20px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
       font-weight: 500;
       font-size: 0.95rem;
       color: #444;
     }
 
-    /* -------------------- RESEARCH SECTION -------------------- */
+    /* -------------------- RESEARCH SECTION (with parallax background) -------------------- */
     .research {
-      padding: 3rem 1rem;
-      max-width: 1000px;
-      margin: 0 auto;
+      width: 100%;
       text-align: center;
     }
-    .research h2 {
+
+    .research__banner {
+      position: relative;
+      height: 500px;
+      /* Adjust as you like */
+      /* Force entire width to be shown (no cropping) */
+      background: url('https://raw.githubusercontent.com/SerranoLab/online/refs/heads/main/Banner.png') top center no-repeat;
+      background-size: 100% auto;
+      will-change: transform;
+      margin: 1rem 0;
+    }
+
+    .research .container h2 {
       font-size: 2rem;
       color: #1F74AF;
       margin-bottom: 1.5rem;
+      text-align: center;
     }
-    .research p {
-      font-size: 1rem;
-      line-height: 1.6;
-      margin-bottom: 2rem;
-      max-width: 800px;
-      margin-left: auto;
-      margin-right: auto;
-    }
-    .research__banner img {
-      width: 100%;
-      max-width: 700px;
-      border-radius: 8px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-      margin: 1.5rem 0;
-    }
+
     .research__projects {
       text-align: left;
       margin: 0 auto;
@@ -232,21 +258,29 @@
       padding-left: 1.2rem;
       line-height: 1.6;
     }
-    .research__projects li {
-      margin: 0.5rem 0;
+
+    /* We'll add a simple parallax effect for the .research__banner */
+    .parallax-research {
+      background-attachment: fixed;
     }
 
+    /* If you want a universal approach or for mobile fallback, 
+       you might remove "background-attachment: fixed" for smaller screens 
+       because iOS devices often disable background-attachment fixed. */
     /* -------------------- TEAM SECTION (CARD STYLES) -------------------- */
     .team {
+      width: 100%;
       background: #f8f8f8;
-      padding: 3rem 1rem;
       text-align: center;
     }
-    .team h2 {
+
+    .team .container h2 {
       color: #1F74AF;
       font-size: 2rem;
       margin-bottom: 2rem;
+      text-align: center;
     }
+
     .team__member {
       background: #fff;
       display: flex;
@@ -256,9 +290,10 @@
       margin: 2rem auto;
       padding: 1.5rem;
       border-radius: 8px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
       text-align: left;
     }
+
     .team__photo {
       width: 180px;
       height: 180px;
@@ -267,70 +302,146 @@
       margin-bottom: 1rem;
       border: 3px solid #1F74AF;
     }
+
     .team__info {
       width: 100%;
     }
+
     .team__info h3 {
       font-size: 1.5rem;
       margin-bottom: 0.3rem;
       color: #1F74AF;
     }
+
     .team__info p {
       margin-bottom: 0.8rem;
       line-height: 1.5;
     }
+
     .team__info a {
       color: #1F74AF;
       font-weight: 600;
     }
+
     .team__past {
       max-width: 800px;
       margin: 2rem auto;
       background: #fff;
       padding: 1.5rem;
       border-radius: 8px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
     }
-    .team__past ul {
-      list-style: disc;
-      padding-left: 1.2rem;
+
+    .team__past-list p {
+      margin-bottom: 0.5rem;
+    }
+
+    /* -------------------- PUBLICATIONS SECTION -------------------- */
+    .publications {
+      width: 100%;
+      background-color: #f8f8f8;
+    }
+
+    .publications__content h2 {
+      color: #1F74AF;
+      font-size: 2rem;
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .publications__content p {
+      margin-bottom: 1.5rem;
+      line-height: 1.6;
+      max-width: 800px;
+      margin: 0 auto 1.5rem;
+    }
+
+    .publications__content a {
+      text-decoration: underline;
+      color: #1F74AF;
+    }
+
+    /* -------------------- CREM FEATURE SECTION -------------------- */
+    .crem {
+      width: 100%;
+      background-color: #ffffff;
+      text-align: center;
+    }
+
+    .crem__content h2 {
+      color: #1F74AF;
+      font-size: 2rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .crem__content p {
+      max-width: 800px;
+      margin: 0.5rem auto 1.5rem auto;
+      font-size: 1rem;
+      line-height: 1.6;
     }
 
     /* -------------------- PATIENT-PARTNERED APPROACH -------------------- */
     .patient-approach {
-      padding: 3rem 1rem;
-      max-width: 1000px;
-      margin: 0 auto;
+      width: 100%;
+      background-color: #f8f8f8;
+      text-align: center;
     }
-    .patient-approach h2 {
+
+    .patient-approach__content h2 {
       color: #1F74AF;
       font-size: 2rem;
       text-align: center;
       margin-bottom: 1.5rem;
     }
-    .patient-approach p,
-    .patient-approach ul {
+
+    .patient-approach__content p,
+    .patient-approach__content ul {
       font-size: 1rem;
       line-height: 1.6;
       max-width: 800px;
       margin: 1rem auto;
+      text-align: left;
     }
-    .patient-approach a {
+
+    .patient-approach__content a {
       text-decoration: underline;
       color: #1F74AF;
     }
 
+    /* Responsive embedded video (YouTube) */
+    .video-container {
+      position: relative;
+      width: 100%;
+      padding-bottom: 56.25%;
+      /* 16:9 ratio */
+      height: 0;
+      margin: 1.5rem 0;
+    }
+
+    .video-container iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+
     /* -------------------- ACCOMPLISHMENTS -------------------- */
     .accomplishments {
+      width: 100%;
       background: #f8f8f8;
-      padding: 3rem 1rem;
       text-align: center;
     }
-    .accomplishments h2 {
+
+    .accomplishments .container h2 {
       color: #1F74AF;
       font-size: 2rem;
       margin-bottom: 2rem;
+      text-align: center;
     }
+
     .accomplishments__item {
       background: #fff;
       max-width: 800px;
@@ -338,86 +449,96 @@
       padding: 1.5rem;
       border-radius: 8px;
       text-align: left;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
     }
+
     .accomplishments__item h3 {
       font-size: 1.3rem;
       margin-bottom: 1rem;
       color: #1F74AF;
     }
+
     .accomplishments__item ul {
       list-style: disc;
       padding-left: 1.2rem;
     }
+
     .accomplishments__item ul li {
       margin-bottom: 0.5rem;
     }
 
     /* -------------------- RESOURCES -------------------- */
     .resources {
-      padding: 3rem 1rem;
-      max-width: 1000px;
-      margin: 0 auto;
+      width: 100%;
       text-align: center;
     }
-    .resources h2 {
+
+    .resources .container h2 {
       color: #1F74AF;
       font-size: 2rem;
       margin-bottom: 1.5rem;
     }
-    .resources p {
+
+    .resources .container p {
       margin: 1rem auto;
       line-height: 1.6;
       max-width: 800px;
     }
-    .resources a {
+
+    .resources .container a {
       color: #1F74AF;
       text-decoration: underline;
     }
 
     /* -------------------- DONATION SECTION -------------------- */
     .donate {
+      width: 100%;
       background: #f8f8f8;
-      padding: 3rem 1rem;
       text-align: center;
     }
-    .donate h2 {
+
+    .donate .container h2 {
       color: #1F74AF;
       font-size: 2rem;
       margin-bottom: 1rem;
+      text-align: center;
     }
-    .donate p {
+
+    .donate .container p {
       max-width: 800px;
       margin: 0.5rem auto;
       line-height: 1.5;
     }
-    .donate a {
+
+    .donate .container a {
       color: #1F74AF;
       text-decoration: underline;
     }
 
     /* -------------------- DEI SECTION -------------------- */
     .dei {
-      padding: 3rem 1rem;
-      max-width: 1000px;
-      margin: 0 auto;
+      width: 100%;
     }
-    .dei h2 {
+
+    .dei .container h2 {
       color: #1F74AF;
       font-size: 2rem;
       text-align: center;
       margin-bottom: 2rem;
     }
+
     .dei__content {
       max-width: 800px;
       margin: 0 auto;
       text-align: left;
     }
+
     .dei__content h3 {
       font-size: 1.3rem;
       margin-bottom: 0.5rem;
       color: #1F74AF;
     }
+
     .dei__content p {
       margin-bottom: 1rem;
       line-height: 1.6;
@@ -425,22 +546,24 @@
 
     /* -------------------- CONTACT SECTION -------------------- */
     .contact {
-      padding: 3rem 1rem;
-      max-width: 1000px;
-      margin: 0 auto;
+      width: 100%;
       text-align: center;
     }
-    .contact h2 {
+
+    .contact .container h2 {
       color: #1F74AF;
       font-size: 2rem;
       margin-bottom: 1rem;
+      text-align: center;
     }
-    .contact p {
+
+    .contact .container p {
       margin-bottom: 2rem;
       max-width: 800px;
       margin-left: auto;
       margin-right: auto;
     }
+
     .contact__form {
       background: #f8f8f8;
       padding: 2rem;
@@ -448,16 +571,19 @@
       max-width: 600px;
       margin: 0 auto;
       text-align: left;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
     }
+
     .contact__form-group {
       margin-bottom: 1.2rem;
     }
+
     .contact__form-group label {
       display: block;
       font-weight: 600;
       margin-bottom: 0.4rem;
     }
+
     .contact__form-group input,
     .contact__form-group textarea {
       width: 100%;
@@ -468,11 +594,13 @@
       font-size: 1rem;
       transition: border-color 0.3s ease;
     }
+
     .contact__form-group input:focus,
     .contact__form-group textarea:focus {
       border-color: #1F74AF;
       outline: none;
     }
+
     .contact__form button {
       display: inline-block;
       margin-top: 1rem;
@@ -485,6 +613,7 @@
       text-align: center;
       padding: 1.5rem;
     }
+
     .footer__text {
       font-size: 0.9rem;
     }
@@ -494,29 +623,36 @@
       .hero__title {
         font-size: 2.2rem;
       }
+
       .hero__subtitle {
         font-size: 1rem;
         margin: 0 1rem;
       }
+
       .values__list {
         flex-direction: column;
       }
+
       .team__member {
         text-align: center;
+      }
+
+      /* iOS doesn't always respect background-attachment:fixed, so consider removing 
+         or toggling for mobile if it looks off. */
+      .research__banner {
+        background-attachment: scroll !important;
       }
     }
   </style>
 </head>
+
 <body>
   <!-- ==================== HEADER / NAVIGATION ==================== -->
   <header>
     <nav>
       <div class="nav__logo">
         <a href="#home">
-          <img
-            src="https://raw.githubusercontent.com/SerranoLab/online/refs/heads/main/Serrano_Primary_Color.png"
-            alt="Serrano Lab Logo"
-          />
+          <img src="https://raw.githubusercontent.com/SerranoLab/online/refs/heads/main/Serrano_Primary_Color.png" alt="Serrano Lab Logo" />
         </a>
       </div>
       <ul class="nav__links">
@@ -525,6 +661,7 @@
         <li><a href="#team" class="nav__link">Team</a></li>
         <li><a href="#patient-approach" class="nav__link">Patient Partnership</a></li>
         <li><a href="#dei" class="nav__link">DEI</a></li>
+        <li><a href="#donate" class="nav__link">Donate</a></li>
         <li><a href="#contact" class="nav__link">Contact</a></li>
       </ul>
     </nav>
@@ -536,8 +673,8 @@
     <div class="hero__content">
       <h1 class="hero__title">The Serrano Lab</h1>
       <p class="hero__subtitle">
-        Advancing our understanding of rare epigenetic disorders affecting 
-        cardiovascular and neurodevelopment through collaborative, rigorous, 
+        Advancing our understanding of rare epigenetic disorders affecting
+        cardiovascular and neurodevelopment through collaborative, rigorous,
         and patient-partnered developmental biology research.
       </p>
       <a href="#values" class="btn btn--primary">Learn More</a>
@@ -546,309 +683,357 @@
 
   <!-- ==================== CORE VALUES SECTION ==================== -->
   <section class="values" id="values">
-    <h2>Our Core Values</h2>
-    <ul class="values__list">
-      <li>Scientific rigor</li>
-      <li>Communication</li>
-      <li>Kindness</li>
-      <li>Honesty</li>
-      <li>Open Source Biology</li>
-      <li>People-centered</li>
-      <li>Self-respect</li>
-      <li>Collaborative spirit</li>
-      <li>Leadership by example</li>
-    </ul>
-  </section>
-
-  <!-- ==================== RESEARCH SECTION ==================== -->
-  <section class="research" id="research">
-    <h2>Research</h2>
-    <p>
-      Our lab currently studies three histone modifiers with essential roles during development and disease:
-      the histone methyltransferase <strong>KMT2D</strong> and the histone acetyltransferases 
-      <strong>KAT6A</strong> and <strong>KAT6B</strong>. To understand their roles in 
-      development and their implications in disease, we use diverse research models, 
-      including zebrafish, human induced pluripotent stem cells (iPSCs), and primary cells.
-    </p>
-    <div class="research__banner">
-      <img
-        src="https://raw.githubusercontent.com/SerranoLab/online/refs/heads/main/Picture1.jpg"
-        alt="Research Banner"
-      />
-    </div>
-    <h3>Current Lab Projects:</h3>
-    <ul class="research__projects">
-      <li>
-        Advancing basic knowledge of histone H3 modifiers in cell processes and 
-        lineages relevant to Kabuki Syndrome and KAT6-related disorders.
-      </li>
-      <li>
-        Understanding how KMT2D influences neuronal progenitor cell heterogeneity 
-        and lineage potential using KMT2D loss-of-function models.
-      </li>
-      <li>
-        Investigating the role of KMT2D in shaping ontogeny-specific pericyte histone 
-        landscapes during development.
-      </li>
-      <li>
-        Defining how KMT2D influences endothelial tip and stalk cell selection during 
-        sprouting angiogenesis.
-      </li>
-      <li>
-        Exploring disease mechanisms driven by pathogenic variants in histone H3 modifiers.
-      </li>
-      <li>
-        Identifying shared mechanisms across distinct diseases and cell lineages.
-      </li>
-    </ul>
-  </section>
-
-  <!-- ==================== TEAM SECTION (with Card Styles) ==================== -->
-  <section class="team" id="team">
-    <h2>Our Team</h2>
-
-    <!-- Angie Serrano -->
-    <div class="team__member">
-      <img
-        src="https://raw.githubusercontent.com/SerranoLab/online/refs/heads/main/Angie%20Serrano.jpeg"
-        alt="Photo of Angie Serrano"
-        class="team__photo"
-      />
-      <div class="team__info">
-        <h3>Angie Serrano</h3>
-        <p><em>Principal Investigator | <a href="mailto:maserr@bu.edu">maserr@bu.edu</a></em></p>
-        <p>Assistant Professor of Medicine at the Center for Regenerative Medicine (CReM), Boston University.</p>
-        <p>
-          <strong>About Angie:</strong><br/>
-          Angie is originally from Argentina. After her training at the University of Utah 
-          in the Yost Lab, she joined Boston University in 2022 to establish her research group. 
-          Her lab studies rare diseases arising from pathogenic variants in histone modifiers, 
-          emphasizing vascular and neurodevelopmental biology. In her free time, Angie enjoys 
-          riding with her family, home coffee roasting, and horror movies!
-        </p>
-        <a href="https://www.bumc.bu.edu/camed/profile/maria-de-los-angeles-serrano/" class="btn">More About Our PI</a>
-      </div>
-    </div>
-
-    <!-- Carly Golden -->
-    <div class="team__member">
-      <img
-        src="https://raw.githubusercontent.com/SerranoLab/online/refs/heads/main/Carly%20Golden.png"
-        alt="Photo of Carly Golden"
-        class="team__photo"
-      />
-      <div class="team__info">
-        <h3>Carly Golden</h3>
-        <p><em>PhD Candidate</em></p>
-        <p>
-          <strong>About Carly:</strong><br/>
-          Carly earned her B.Sc. in Biology from Mansfield University, studying biofluorescence 
-          in coral. She completed her M.Sc. in Molecular and Cellular Biology at Brandeis University, 
-          investigating actin-regulating proteins. Before returning to graduate school, she worked 
-          at several companies developing AAV gene therapies for rare diseases. In the Serrano Lab, 
-          she studies how the epigenetic regulator KMT2D controls neural progenitor cell development 
-          using single-cell multiomics, spectral flow cytometry, and stem cell models. Outside the lab, 
-          Carly enjoys hiking, cooking new recipes, and staying engaged with the rare disease community.
-        </p>
-      </div>
-    </div>
-
-    <!-- Sandeep Sreerama -->
-    <div class="team__member">
-      <img
-        src="https://raw.githubusercontent.com/SerranoLab/online/refs/heads/main/Sandeep%20Sreerama.jpeg"
-        alt="Photo of Sandeep Sreerama"
-        class="team__photo"
-      />
-      <div class="team__info">
-        <h3>Sandeep Sreerama</h3>
-        <p><em>MD/PhD Candidate</em></p>
-        <p>
-          <strong>About Sandeep:</strong><br/>
-          Sandeep graduated from the University of Central Florida with a B.Sc. in Biomedical 
-          Science and Biotechnology, joining Boston University's MD/PhD program in 2021. 
-          He is a PhD Candidate in the Molecular and Translational Medicine program in Dr. Serrano’s lab, 
-          researching pericyte biology, their developmental precursors, and the epigenetic 
-          modifier KMT2D. Sandeep enjoys board games with friends and exploring local restaurants.
-        </p>
-      </div>
-    </div>
-
-    <!-- Sandra Sulser Ponce De Leon -->
-    <div class="team__member">
-      <img
-        src="https://raw.githubusercontent.com/SerranoLab/online/refs/heads/main/Sandra.jpg"
-        alt="Photo of Sandra Sulser Ponce De Leon"
-        class="team__photo"
-      />
-      <div class="team__info">
-        <h3>Sandra Sulser Ponce De Leon</h3>
-        <p><em>PhD Candidate</em></p>
-        <p>
-          <strong>About Sandra:</strong><br/>
-          Sandra is originally from Mexico City, where she began her career as a Registered Dietitian. 
-          Her passion for studying molecular mechanisms of metabolism and chronic diseases brought her 
-          to Boston, where she earned an MSc. in Nutrition and Metabolism. Currently, Sandra studies 
-          how KMT2D regulates endothelial cell identity during angiogenesis, specifically in tip 
-          and stalk cell selection and shuffling, using iPSC-derived endothelial cells and 
-          zebrafish models.
-        </p>
-      </div>
-    </div>
-
-    <!-- Past Members -->
-    <div class="team__past">
-      <h3>Past Members</h3>
-      <ul>
-        <li>Zoe Hoffmann Kamrat (Undergraduate Summer Internship)</li>
-        <li>Christopher Buie (AHA SURE Fellow)</li>
-        <li>Irena Feng (MD/PhD Rotation Student)</li>
-        <li>Sophia Blankevoort (Undergraduate Summer Internship)</li>
-        <li>Emilia Serrano (Undergraduate Summer Internship)</li>
-        <li>Jack Nelson (PhD Rotation Student)</li>
-        <li>Saylor Williams (Lab Manager)</li>
+    <div class="container">
+      <h2>Our Core Values</h2>
+      <ul class="values__list">
+        <li>Scientific rigor</li>
+        <li>Communication</li>
+        <li>Kindness</li>
+        <li>Honesty</li>
+        <li>Open Source Biology</li>
+        <li>People-centered</li>
+        <li>Self-respect</li>
+        <li>Collaborative spirit</li>
+        <li>Leadership by example</li>
       </ul>
+    </div>
+  </section>
+
+  <!-- ==================== RESEARCH SECTION WITH PARALLAX BANNER ==================== -->
+  <section class="research" id="research">
+    <!-- Parallax banner (full width) -->
+    <div class="research__banner parallax-research"></div>
+    <div class="container">
+      <h2>Research</h2>
+      <p>
+        Our lab currently studies three histone modifiers with essential roles during development and disease:
+        the histone methyltransferase <strong>KMT2D</strong> and the histone acetyltransferases
+        <strong>KAT6A</strong> and <strong>KAT6B</strong>. To understand their roles in
+        development and their implications in disease, we use diverse research models,
+        including zebrafish, human induced pluripotent stem cells (iPSCs), and primary cells.
+      </p>
+    </div>
+
+    <div class="container">
+      <h3>Current Lab Projects:</h3>
+      <ul class="research__projects">
+        <li>
+          Advancing basic knowledge of histone H3 modifiers in cell processes and
+          lineages relevant to Kabuki Syndrome and KAT6-related disorders.
+        </li>
+        <li>
+          Understanding how KMT2D influences neuronal progenitor cell heterogeneity
+          and lineage potential using KMT2D loss-of-function models.
+        </li>
+        <li>
+          Investigating the role of KMT2D in shaping ontogeny-specific pericyte histone
+          landscapes during development.
+        </li>
+        <li>
+          Defining how KMT2D influences endothelial tip and stalk cell selection during
+          sprouting angiogenesis.
+        </li>
+        <li>
+          Exploring disease mechanisms driven by pathogenic variants in histone H3 modifiers.
+        </li>
+        <li>
+          Identifying shared mechanisms across distinct diseases and cell lineages.
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ==================== TEAM SECTION ==================== -->
+  <section class="team" id="team">
+    <div class="container">
+      <h2>Our Team</h2>
+
+      <!-- Angie Serrano -->
+      <div class="team__member">
+        <img src="https://raw.githubusercontent.com/SerranoLab/online/refs/heads/main/Angie%20Serrano.jpeg" alt="Photo of Angie Serrano" class="team__photo" />
+        <div class="team__info">
+          <h3>Angie Serrano</h3>
+          <p><em>Principal Investigator | <a href="mailto:maserr@bu.edu">maserr@bu.edu</a></em></p>
+          <p>Assistant Professor of Medicine at the Center for Regenerative Medicine (CReM), Boston University.</p>
+          <p>
+            <strong>About Angie:</strong><br />
+            Angie is originally from Argentina. After her training at the University of Utah
+            in the Yost Lab, she joined Boston University in 2022 to establish her research group.
+            Her lab studies rare diseases arising from pathogenic variants in histone modifiers,
+            emphasizing vascular and neurodevelopmental biology. In her free time, Angie enjoys
+            riding with her family, home coffee roasting, and horror movies!
+          </p>
+          <a href="https://www.bumc.bu.edu/camed/profile/maria-de-los-angeles-serrano/" class="btn">More About Our PI</a>
+        </div>
+      </div>
+
+      <!-- Carly Golden -->
+      <div class="team__member">
+        <img src="https://raw.githubusercontent.com/SerranoLab/online/refs/heads/main/Carly%20Golden.png" alt="Photo of Carly Golden" class="team__photo" />
+        <div class="team__info">
+          <h3>Carly Golden</h3>
+          <p><em>PhD Candidate</em></p>
+          <p>
+            <strong>About Carly:</strong><br />
+            Carly earned her B.Sc. in Biology from Mansfield University, studying biofluorescence
+            in coral. She completed her M.Sc. in Molecular and Cellular Biology at Brandeis University,
+            investigating actin-regulating proteins. Before returning to graduate school, she worked
+            at several companies developing AAV gene therapies for rare diseases. In the Serrano Lab,
+            she studies how the epigenetic regulator KMT2D controls neural progenitor cell development
+            using single-cell multiomics, spectral flow cytometry, and stem cell models. Outside the lab,
+            Carly enjoys hiking, cooking new recipes, and staying engaged with the rare disease community.
+          </p>
+        </div>
+      </div>
+
+      <!-- Sandeep Sreerama -->
+      <div class="team__member">
+        <img src="https://raw.githubusercontent.com/SerranoLab/online/refs/heads/main/Sandeep%20Sreerama.jpeg" alt="Photo of Sandeep Sreerama" class="team__photo" />
+        <div class="team__info">
+          <h3>Sandeep Sreerama</h3>
+          <p><em>MD/PhD Candidate</em></p>
+          <p>
+            <strong>About Sandeep:</strong><br />
+            Sandeep graduated from the University of Central Florida with a B.Sc. in Biomedical
+            Science and Biotechnology, joining Boston University's MD/PhD program in 2021.
+            He is a PhD Candidate in the Molecular and Translational Medicine program in Dr. Serrano’s lab,
+            researching pericyte biology, their developmental precursors, and the epigenetic
+            modifier KMT2D. Sandeep enjoys board games with friends and exploring local restaurants.
+          </p>
+        </div>
+      </div>
+
+      <!-- Sandra Sulser Ponce De Leon -->
+      <div class="team__member">
+        <img src="https://raw.githubusercontent.com/SerranoLab/online/refs/heads/main/Sandra.jpg" alt="Photo of Sandra Sulser Ponce De Leon" class="team__photo" />
+        <div class="team__info">
+          <h3>Sandra Sulser Ponce De Leon</h3>
+          <p><em>PhD Candidate</em></p>
+          <p>
+            <strong>About Sandra:</strong><br />
+            Sandra is originally from Mexico City, where she began her career as a Registered Dietitian.
+            Her passion for studying molecular mechanisms of metabolism and chronic diseases brought her
+            to Boston, where she earned an MSc. in Nutrition and Metabolism. Currently, Sandra studies
+            how KMT2D regulates endothelial cell identity during angiogenesis, specifically in tip
+            and stalk cell selection and shuffling, using iPSC-derived endothelial cells and
+            zebrafish models.
+          </p>
+        </div>
+      </div>
+
+      <!-- Past Members (no bullet points) -->
+      <div class="team__past">
+        <h3>Past Members</h3>
+        <div class="team__past-list">
+          <p>Zoe Hoffmann Kamrat (Undergraduate Summer Internship)</p>
+          <p>Christopher Buie (AHA SURE Fellow)</p>
+          <p>Irena Feng (MD/PhD Rotation Student)</p>
+          <p>Sophia Blankevoort (Undergraduate Summer Internship)</p>
+          <p>Emilia Serrano (Undergraduate Summer Internship)</p>
+          <p>Jack Nelson (PhD Rotation Student)</p>
+          <p>Saylor Williams (Lab Manager)</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== PUBLICATIONS SECTION ==================== -->
+  <section class="publications" id="publications">
+    <div class="container publications__content">
+      <h2>Publications</h2>
+
+      <p>
+        <strong>Moreira-Bouchard JD, Cunha J, Tao BS, Kim H, Lepson J, Nessen EJ, Milstone ZJ, Fisher N, Clinton N, Roberts LM, Serrano MA, Gopal DM, Benjamin EJ, So-Armah K, Fetterman JL.</strong><br />
+        Creating diversity, equity, inclusion, and accessibility statements for your CV: a resource guide to effectiveness and comprehensiveness. Epub 2024 Nov 1. PMID: 39485298.<br />
+        <a href="https://www.ncbi.nlm.nih.gov/pubmed/39485298/" target="_blank">Link</a>
+      </p>
+
+      <p>
+        <strong>Golden CS, Williams S, Blankevoort S, Belkina A, Yost HJ, Serrano MA.</strong><br />
+        Nuclear Histone 3 Post-translational Modification Profiling in Whole Cells using Spectral Flow Cytometry. bioRxiv. 2024 Nov. doi: 10.1101/2024.10.03.616268.<br />
+        <a href="https://www.biorxiv.org/content/10.1101/2024.10.03.616268v1" target="_blank">Link</a>
+      </p>
+
+      <p>
+        <strong>Golden CS, Williams S, Serrano MA.</strong><br />
+        Molecular insights of KMT2D and clinical aspects of Kabuki syndrome type 1. Birth Defects Res. 2023 Nov 15;115(19):1809-1824. Review. PubMed PMID: 37158694.<br />
+        <a href="https://pubmed.ncbi.nlm.nih.gov/37158694/" target="_blank">Link</a>
+      </p>
+
+      <p>
+        <strong>Serrano MA, Demarest BL, Tone-Pah-Hote T, Tristani-Firouzi M, Yost HJ.</strong><br />
+        Inhibition of Notch signaling rescues cardiovascular development in Kabuki Syndrome. PLoS Biol. 2019 Sep;17(9):e3000087. PubMed PMID: 31479440.<br />
+        <a href="https://pubmed.ncbi.nlm.nih.gov/31479440/" target="_blank">Link</a>
+      </p>
+    </div>
+  </section>
+
+  <!-- ==================== CREM FEATURE SECTION ==================== -->
+  <section class="crem" id="crem">
+    <div class="container crem__content">
+      <h2>The Center for Regenerative Medicine (CReM)</h2>
+      <p>
+        Learn more about the Center for Regenerative Medicine (CReM) and our
+        collective efforts to fulfill our shared mission: <em>Advancing science
+          to heal the world.</em>
+      </p>
+      <a href="https://crem.bu.edu/about-us/#:~:text=The%20Center%20for%20Regenerative%20Medicine%20(CReM)%20at%20Boston%20University's%20Medical,Boston%20University%20School%20of%20Medicine." class="btn btn--primary" target="_blank">
+        Learn More
+      </a>
     </div>
   </section>
 
   <!-- ==================== PATIENT-PARTNERED APPROACH ==================== -->
   <section class="patient-approach" id="patient-approach">
-    <h2>Our Patient-Partnered Approach</h2>
-    <p>
-      In collaboration with the Center for Regenerative Medicine (CReM) and the KAT6 Foundation, 
-      we’ve established the <strong>KAT6 patient iPSC Bank</strong>.
-    </p>
-    <p>Check out more information about our patient-partnered approach:</p>
-    <ul>
-      <li><a href="https://youtu.be/5YAjCOvKx1c?feature=shared" target="_blank">Patient-partnered research video 1</a></li>
-      <li><a href="https://youtu.be/eQAgOKZDAUE?t=811" target="_blank">Patient-partnered research video 2</a></li>
-      <li><a href="https://youtu.be/Aztki7jVLn4?feature=shared" target="_blank">Patient-partnered research video 3</a></li>
-    </ul>
+    <div class="container patient-approach__content">
+      <h2>Our Patient-Partnered Approach</h2>
+      <p>
+        In collaboration with the Center for Regenerative Medicine (CReM) and the KAT6 Foundation,
+        we’ve established the
+        <a href="https://serranolab.github.io/iKAT6_BANK/" target="_blank"><strong>KAT6 patient iPSC Bank</strong></a>.
+      </p>
+      <p>Check out more information about our patient-partnered approach:</p>
+      <ul>
+        <li><a href="https://youtu.be/5YAjCOvKx1c?feature=shared" target="_blank">A tour in the Serrano Lab at the CReM!</a></li>
+        <li><a href="https://youtu.be/eQAgOKZDAUE?t=811" target="_blank">Our Lab is featured in the film Genetic Defekt, by Niko Mylonas and the KAT6 Foundation</a></li>
+        <li><a href="https://youtu.be/Aztki7jVLn4?feature=shared" target="_blank">Supporting patient-focused research through a KAT6A and KAT6B iPSC Bank. Talk By Saylor Williams</a></li>
+      </ul>
+
+      <!-- Responsive Embedded YouTube Video. We'll load it muted, allow JS control. -->
+      <div class="video-container">
+        <iframe id="myVideo" src="https://www.youtube.com/embed/5YAjCOvKx1c?enablejsapi=1&mute=1" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+      </div>
+    </div>
   </section>
 
   <!-- ==================== LAB ACCOMPLISHMENTS ==================== -->
   <section class="accomplishments">
-    <h2>Lab Accomplishments</h2>
+    <div class="container">
+      <h2>Lab Accomplishments</h2>
 
-    <div class="accomplishments__item">
-      <h3><i class="fas fa-award"></i> Carly Golden:</h3>
-      <ul>
-        <li>
-          Co-developed EpiFlow, a high-throughput spectral flow cytometry platform, 
-          to characterize histone modification dynamics at single-cell resolution.
-        </li>
-        <li>
-          Characterized chromatin and gene expression changes in KMT2D-deficient neural 
-          progenitors by integrating single-cell multiome data.
-        </li>
-      </ul>
-    </div>
+      <div class="accomplishments__item">
+        <h3><i class="fas fa-award"></i> Carly Golden:</h3>
+        <ul>
+          <li>
+            Co-developed EpiFlow, a high-throughput spectral flow cytometry platform,
+            to characterize histone modification dynamics at single-cell resolution.
+          </li>
+          <li>
+            Characterized chromatin and gene expression changes in KMT2D-deficient neural
+            progenitors by integrating single-cell multiome data.
+          </li>
+        </ul>
+      </div>
 
-    <div class="accomplishments__item">
-      <h3><i class="fas fa-award"></i> Sandeep Sreerama:</h3>
-      <ul>
-        <li>
-          Adapted EpiFlow for concurrent measurement of histone PTMs and protein 
-          expression at single-cell resolution in zebrafish tissues.
-        </li>
-        <li>
-          Identified ontogeny-specific histone PTM signatures in KMT2D-deficient pericytes.
-        </li>
-      </ul>
-    </div>
+      <div class="accomplishments__item">
+        <h3><i class="fas fa-award"></i> Sandeep Sreerama:</h3>
+        <ul>
+          <li>
+            Adapted EpiFlow for concurrent measurement of histone PTMs and protein
+            expression at single-cell resolution in zebrafish tissues.
+          </li>
+          <li>
+            Identified ontogeny-specific histone PTM signatures in KMT2D-deficient pericytes.
+          </li>
+        </ul>
+      </div>
 
-    <div class="accomplishments__item">
-      <h3><i class="fas fa-award"></i> Sandra Sulser Ponce De Leon:</h3>
-      <ul>
-        <li>
-          Invited speaker at the 2024 Reinhart Frank Symposium (University of Tübingen, 
-          Germany), presenting research on KMT2D’s role in developmental sprouting angiogenesis.
-        </li>
-        <li>
-          Optimized differentiation protocols for KMT2D-null iPSC-derived arterial-like 
-          endothelial cells.
-        </li>
-      </ul>
+      <div class="accomplishments__item">
+        <h3><i class="fas fa-award"></i> Sandra Sulser Ponce De Leon:</h3>
+        <ul>
+          <li>
+            Invited speaker at the 2024 Reinhart Frank Symposium (University of Tübingen,
+            Germany), presenting research on KMT2D’s role in developmental sprouting angiogenesis.
+          </li>
+          <li>
+            Optimized differentiation protocols for KMT2D-null iPSC-derived arterial-like
+            endothelial cells.
+          </li>
+        </ul>
+      </div>
     </div>
   </section>
 
   <!-- ==================== MORE RESOURCES ==================== -->
   <section class="resources">
-    <h2>More Resources</h2>
-    <p>
-      We love zebrafish! Check out our <a href="https://serranolab.github.io/GAME_webpage/" target="_blank">Zebrafish Game</a>! <span>😊</span>
-    </p>
-    <p>
-      More resources available on our <a href="https://github.com/SerranoLab" target="_blank">Lab GitHub</a>.
-    </p>
+    <div class="container">
+      <h2>More Resources</h2>
+      <p>
+        We love zebrafish! Check out our <a href="https://serranolab.github.io/GAME_webpage/" target="_blank">Zebrafish Game</a>! <span>😊</span>
+      </p>
+      <p>
+        More resources available on our <a href="https://github.com/SerranoLab" target="_blank">Lab GitHub</a>.
+      </p>
+    </div>
   </section>
 
   <!-- ==================== DONATION SECTION ==================== -->
-  <section class="donate">
-    <h2>You Can Make a Difference!</h2>
-    <p>
-      To support our lab financially, please consider a donation through 
-      <a href="#donation-link" target="_blank">this link</a>. Kindly add 
-      "<strong>Serrano Lab/CReM</strong>" in the note field.
-    </p>
+  <section class="donate" id="donate">
+    <div class="container">
+      <h2>You Can Make a Difference!</h2>
+      <p>
+        To support our lab financially, please consider a donation through
+        <a href="https://trusted.bu.edu/s/1759/22/form.aspx?sid=1759&gid=2&pgid=422&cid=1060&dids=113&appealcode=WEBMED-DV" target="_blank">this link</a>. Kindly add
+        "<strong>Serrano Lab/CReM</strong>" in the note field.
+      </p>
+    </div>
   </section>
 
   <!-- ==================== DEI SECTION ==================== -->
   <section class="dei" id="dei">
-    <h2>Diversity, Equity, Inclusion, and Accessibility</h2>
-    <div class="dei__content">
-      <h3>Angie's Statement:</h3>
-      <p>
-        In our lab, we nurture a culture that values diversity, collaboration, and scientific rigor. 
-        I have mentored students from underrepresented communities in science, offering sustained 
-        support beyond their lab experiences. I strive to create a safe, inclusive, and respectful 
-        environment for scientific discussion.
-      </p>
-      <p>
-        As a first-generation Latin American woman in STEM, I openly share my challenges and confidently 
-        model overcoming them. This approach provides a respectful and supportive environment for 
-        mentees from all backgrounds to find their scientific voices.
-      </p>
-      <p>
-        Improving ethnic and racial representation in academia requires encouraging future scientists 
-        from an early age. I actively participate in programs and panel discussions to inspire K-12 students, 
-        teaching them that curiosity is the primary skill for science and sharing resources for their STEM journey.
-      </p>
-      <p>
-        I also value long-term mentorship, maintaining contact with former trainees, following their career paths, 
-        and supporting their growth. I believe in science's higher purpose and in empowering my mentees to 
-        profoundly impact underserved communities.
-      </p>
+    <div class="container">
+      <h2>Diversity, Equity, Inclusion, and Accessibility</h2>
+      <div class="dei__content">
+        <h3>Angie's Statement:</h3>
+        <p>
+          In our lab, we nurture a culture that values diversity, collaboration, and scientific rigor.
+          I have mentored students from underrepresented communities in science, offering sustained
+          support beyond their lab experiences. I strive to create a safe, inclusive, and respectful
+          environment for scientific discussion.
+        </p>
+        <p>
+          As a first-generation Latin American woman in STEM, I openly share my challenges and confidently
+          model overcoming them. This approach provides a respectful and supportive environment for
+          mentees from all backgrounds to find their scientific voices.
+        </p>
+        <p>
+          Improving ethnic and racial representation in academia requires encouraging future scientists
+          from an early age. I actively participate in programs and panel discussions to inspire K-12 students,
+          teaching them that curiosity is the primary skill for science and sharing resources for their STEM journey.
+        </p>
+        <p>
+          I also value long-term mentorship, maintaining contact with former trainees, following their career paths,
+          and supporting their growth. I believe in science's higher purpose and in empowering my mentees to
+          profoundly impact underserved communities.
+        </p>
+      </div>
     </div>
   </section>
 
   <!-- ==================== CONTACT SECTION ==================== -->
   <section class="contact" id="contact">
-    <h2>Contact Us</h2>
-    <p>We would love to hear from you! Please fill out the form below.</p>
-   <form
-  action="https://formspree.io/f/xzzrbelz"
-  method="POST"
-  class="contact__form"
->
-  <div class="contact__form-group">
-    <label for="name">Your Name:</label>
-    <input type="text" id="name" name="name" required />
-  </div>
+    <div class="container">
+      <h2>Contact Us</h2>
+      <p>We would love to hear from you! Please fill out the form below.</p>
+      <form action="https://formspree.io/f/xzzrbelz" method="POST" class="contact__form">
+        <div class="contact__form-group">
+          <label for="name">Your Name:</label>
+          <input type="text" id="name" name="name" required />
+        </div>
 
-  <div class="contact__form-group">
-    <label for="email">Your Email:</label>
-    <input type="email" id="email" name="email" required />
-  </div>
+        <div class="contact__form-group">
+          <label for="email">Your Email:</label>
+          <input type="email" id="email" name="email" required />
+        </div>
 
-  <div class="contact__form-group">
-    <label for="message">Message:</label>
-    <textarea id="message" name="message" rows="6" required></textarea>
-  </div>
+        <div class="contact__form-group">
+          <label for="message">Message:</label>
+          <textarea id="message" name="message" rows="6" required></textarea>
+        </div>
 
-  <button type="submit" class="btn btn--primary">Submit</button>
-</form>
-
+        <button type="submit" class="btn btn--primary">Submit</button>
+      </form>
+    </div>
   </section>
 
   <!-- ==================== FOOTER ==================== -->
@@ -858,22 +1043,65 @@
     </p>
   </footer>
 
-  <!-- ==================== JAVASCRIPT FOR PARALLAX & DYNAMIC YEAR ==================== -->
+  <!-- ==================== JAVASCRIPT FOR PARALLAX & YOUTUBE AUTOPLAY ==================== -->
   <script>
     // Insert current year into the footer
     const yearSpan = document.getElementById('year');
     if (yearSpan) {
       yearSpan.textContent = new Date().getFullYear();
     }
-
-    // Smooth Parallax Effect for the Hero Section
+    // Parallax effect for Hero
     const heroSection = document.querySelector('.hero');
-
     window.addEventListener('scroll', () => {
       let offset = window.pageYOffset;
-      // Adjust the background position for parallax
       heroSection.style.backgroundPositionY = offset * 0.5 + 'px';
     });
+    // Parallax effect for the research banner
+    // If you want it to move at a different speed, do similarly:
+    const researchBanner = document.querySelector('.parallax-research');
+    window.addEventListener('scroll', () => {
+      if (!researchBanner) return;
+      let offset2 = window.pageYOffset;
+      researchBanner.style.backgroundPositionY = offset2 * 0.3 + 'px';
+    });
+    // ==================== YOUTUBE AUTOPLAY ON SCROLL ====================
+    // For this to work properly, we must:
+    // 1. Include '?enablejsapi=1&mute=1' in the iframe src
+    // 2. Insert the YouTube IFrame API script
+    // 3. Wait for scroll intersection, then call player.playVideo().
+    let player;
+    // This function gets called when the IFrame API is ready
+    function onYouTubeIframeAPIReady() {
+      player = new YT.Player('myVideo', {
+        events: {
+          'onReady': onPlayerReady
+        }
+      });
+    }
+
+    function onPlayerReady(event) {
+      // Setup IntersectionObserver to watch the video element
+      const videoIframe = document.getElementById('myVideo');
+      if (!videoIframe) return;
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          // If the video is visible, play it
+          if (entry.isIntersecting) {
+            event.target.playVideo();
+          } else {
+            event.target.pauseVideo();
+          }
+        });
+      }, {
+        threshold: 0.5
+      });
+      observer.observe(videoIframe);
+    }
+    // Dynamically load the YouTube IFrame API
+    let tag = document.createElement('script');
+    tag.src = "https://www.youtube.com/iframe_api";
+    document.head.appendChild(tag);
   </script>
 </body>
+
 </html>

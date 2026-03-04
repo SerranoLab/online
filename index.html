@@ -1,990 +1,1288 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8" />
   <title>The Serrano Lab</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="The Serrano Lab at Boston University studies rare pediatric epigenetic disorders using zebrafish, iPSC models, and spectral flow cytometry." />
 
-  <!-- Google Fonts (Raleway & Open Sans) -->
-  <link rel="preconnect" href="https://fonts.gstatic.com" />
-  <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;500;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet" />
+  <!-- Fonts: Fraunces (stand-in for Larken Medium) + Source Sans 3 (stand-in for Whitney Book) -->
+  <!-- To use your actual Larken & Whitney fonts, replace these with @font-face declarations -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Source+Sans+3:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
 
-  <!-- Font Awesome (for icons) -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
 
-  <!-- Inline CSS -->
   <style>
-    /* -------------------- GLOBAL RESETS -------------------- */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
+    /* ============ CSS VARIABLES ============ */
+    :root {
+      --blue: #1F74AF;
+      --blue-light: #45C5E2;
+      --blue-dark: #175A87;
+      --coral: #E05928;
+      --coral-light: #F78E28;
+      --navy: #1A3A5C;
+      --white: #FFFFFF;
+      --gray-50: #FAFAF9;
+      --gray-100: #F5F5F4;
+      --gray-200: #E7E5E4;
+      --gray-400: #A8A29E;
+      --gray-600: #57534E;
+      --gray-800: #292524;
+      --gray-900: #1C1917;
+      --font-display: 'Fraunces', serif; /* Replace with 'Larken', serif if self-hosting */
+      --font-body: 'Source Sans 3', sans-serif; /* Replace with 'Whitney', sans-serif if self-hosting */
+      --max-w: 1100px;
+      --section-pad: 5rem 1.5rem;
     }
 
+    /* ============ RESET ============ */
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; scroll-padding-top: 80px; }
     body {
-      font-family: 'Raleway', sans-serif;
-      background-color: #ffffff;
-      color: #333;
-      line-height: 1.6;
+      font-family: var(--font-body);
+      background: var(--white);
+      color: var(--gray-800);
+      line-height: 1.7;
       overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
     }
+    a { text-decoration: none; color: inherit; }
+    ul { list-style: none; }
+    img { max-width: 100%; display: block; }
+    h1, h2, h3, h4 { font-family: var(--font-display); font-weight: 400; line-height: 1.2; }
 
-    a {
-      text-decoration: none;
-      color: inherit;
+    /* ============ UTILITIES ============ */
+    .container { max-width: var(--max-w); margin: 0 auto; padding: var(--section-pad); }
+    .section-label {
+      font-family: var(--font-body);
+      font-weight: 600;
+      font-size: 0.75rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--blue);
+      margin-bottom: 0.75rem;
+      display: block;
     }
-
-    ul {
-      list-style: none;
-      margin: 0;
-      padding: 0;
+    .section-title {
+      font-size: clamp(1.8rem, 4vw, 2.6rem);
+      color: var(--navy);
+      margin-bottom: 1.5rem;
     }
-
-    h1,
-    h2,
-    h3,
-    h4 {
-      font-weight: 700;
-      margin-bottom: 0.5rem;
+    .section-title--light { color: var(--white); }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.7rem 1.6rem;
+      border-radius: 6px;
+      font-family: var(--font-body);
+      font-weight: 600;
+      font-size: 0.9rem;
+      border: none;
+      cursor: pointer;
+      transition: all 0.25s ease;
     }
-
-    p {
-      margin-bottom: 1rem;
+    .btn--coral {
+      background: linear-gradient(135deg, var(--coral), var(--coral-light));
+      color: var(--white);
+      box-shadow: 0 4px 14px rgba(224, 89, 40, 0.3);
     }
-
-    /* Container utility for centering and max width */
-    .container {
-      max-width: 1000px;
-      margin: 0 auto;
-      padding: 3rem 1rem;
+    .btn--coral:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(224, 89, 40, 0.4); }
+    .btn--outline {
+      background: transparent;
+      color: var(--white);
+      border: 2px solid rgba(255,255,255,0.5);
     }
+    .btn--outline:hover { border-color: var(--white); background: rgba(255,255,255,0.1); }
+    .btn--blue {
+      background: var(--blue);
+      color: var(--white);
+    }
+    .btn--blue:hover { background: var(--blue-light); }
 
-    /* -------------------- HEADER & NAV -------------------- */
+    /* ============ HEADER ============ */
     header {
       position: fixed;
       top: 0;
       width: 100%;
-      background: #ffffff;
-      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
       z-index: 999;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--gray-200);
+      transition: box-shadow 0.3s;
     }
-
+    header.scrolled { box-shadow: 0 2px 20px rgba(0,0,0,0.08); }
     nav {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 1rem 2rem;
       max-width: 1200px;
       margin: 0 auto;
+      padding: 0.6rem 2rem;
     }
-
-    .nav__logo img {
-      height: 130px;
-      width: auto;
-    }
-
+    .nav__logo img { height: 70px; width: auto; }
     .nav__links {
       display: flex;
       align-items: center;
+      gap: 0.2rem;
     }
-
-    .nav__links li {
-      margin-left: 1.5rem;
-    }
-
     .nav__link {
-      color: #333;
       font-weight: 500;
-      transition: color 0.3s ease;
+      font-size: 0.88rem;
+      padding: 0.5rem 0.8rem;
+      border-radius: 6px;
+      color: var(--gray-600);
+      transition: all 0.2s;
+      letter-spacing: 0.02em;
     }
+    .nav__link:hover { color: var(--blue); background: var(--gray-100); }
 
-    .nav__link:hover {
-      color: #1F74AF;
+    /* Hamburger */
+    .hamburger { display: none; background: none; border: none; cursor: pointer; padding: 0.5rem; }
+    .hamburger span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: var(--gray-800);
+      margin: 5px 0;
+      transition: all 0.3s;
+      border-radius: 2px;
     }
+    .hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+    .hamburger.active span:nth-child(2) { opacity: 0; }
+    .hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
 
-    /* -------------------- NICE BUTTON STYLES (Orange Gradient) -------------------- */
-    .btn {
-      display: inline-block;
-      padding: 0.6rem 1.2rem;
-      border-radius: 30px;
-      border: none;
-      background: linear-gradient(to right, #E05928, #F78E28);
-      color: #fff;
-      font-weight: 600;
-      transition: all 0.3s ease;
-      cursor: pointer;
-      text-align: center;
-    }
-
-    .btn:hover {
-      filter: brightness(0.9);
-    }
-
-    .btn--primary {
-      display: inline-block;
-      padding: 0.6rem 1.2rem;
-      border-radius: 30px;
-      border: none;
-      background: linear-gradient(to right, #E05928, #F78E28);
-      color: #fff;
-      font-weight: 600;
-      transition: all 0.3s ease;
-      cursor: pointer;
-    }
-
-    .btn--primary:hover {
-      filter: brightness(0.9);
-    }
-
-    /* -------------------- HERO (PARALLAX) -------------------- */
+    /* ============ HERO ============ */
     .hero {
       position: relative;
-      width: 100%;
-      height: 100vh;
+      min-height: 100vh;
       display: flex;
       align-items: center;
       justify-content: center;
-      color: #fff;
+      color: var(--white);
       text-align: center;
       overflow: hidden;
     }
-
-    .hero::before {
-      content: "";
+    .hero__bg {
       position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
+      inset: 0;
       background: url('https://raw.githubusercontent.com/SerranoLab/online/refs/heads/main/Serrano%20Lab%202023.jpg') center/cover no-repeat;
       will-change: transform;
-      z-index: -1;
     }
-
     .hero__overlay {
       position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.35);
-      z-index: 0;
+      inset: 0;
+      background: linear-gradient(160deg, rgba(31,116,175,0.78) 0%, rgba(69,197,226,0.55) 100%);
     }
-
     .hero__content {
       position: relative;
       z-index: 1;
-      max-width: 800px;
-      padding: 0 1rem;
+      max-width: 720px;
+      padding: 0 1.5rem;
     }
-
-    .hero__title {
-      font-size: 3rem;
-      margin-bottom: 1rem;
-    }
-
-    .hero__subtitle {
-      font-size: 1.25rem;
-      margin-bottom: 2rem;
-      font-family: 'Open Sans', sans-serif;
-      font-weight: 400;
-      line-height: 1.4;
-      color: #f0f0f0;
-    }
-
-    /* -------------------- MISSION / VALUES -------------------- */
-    .values {
-      width: 100%;
-      background-color: #f8f8f8;
-      text-align: center;
-    }
-
-    .values .container h2 {
-      color: #1F74AF;
-      font-size: 2rem;
+    .hero__tag {
+      font-family: var(--font-body);
+      font-weight: 600;
+      font-size: 0.8rem;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.8);
       margin-bottom: 1.5rem;
-      text-align: center;
+    }
+    .hero__title {
+      font-size: clamp(2.4rem, 5.5vw, 3.6rem);
+      margin-bottom: 1.25rem;
+      line-height: 1.1;
+    }
+    .hero__subtitle {
+      font-family: var(--font-body);
+      font-size: 1.1rem;
+      font-weight: 300;
+      line-height: 1.7;
+      color: rgba(255,255,255,0.9);
+      margin-bottom: 2.5rem;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .hero__ctas { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+
+    /* ============ FOCUS STRIP ============ */
+    .focus-strip {
+      background: var(--navy);
+      color: var(--white);
+    }
+    .focus-strip__inner {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 2.5rem;
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 2.2rem 1.5rem;
+      flex-wrap: wrap;
+    }
+    .focus-strip__item {
+      display: flex;
+      align-items: center;
+      gap: 0.9rem;
+    }
+    .focus-strip__item i {
+      font-size: 1.4rem;
+      color: var(--blue-light);
+      flex-shrink: 0;
+    }
+    .focus-strip__item strong {
+      display: block;
+      font-size: 0.95rem;
+      font-weight: 600;
+    }
+    .focus-strip__item span {
+      display: block;
+      font-size: 0.8rem;
+      color: rgba(255,255,255,0.55);
+      margin-top: 0.1rem;
+    }
+    .focus-strip__divider {
+      width: 1px;
+      height: 36px;
+      background: rgba(255,255,255,0.15);
     }
 
-    .values__list {
+    /* ============ VALUES ============ */
+    .values { background: var(--gray-50); }
+    .values__grid {
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
-      max-width: 1000px;
-      margin: 0 auto;
+      gap: 0.6rem;
+      margin-top: 1rem;
     }
-
-    .values__list li {
-      background: #fff;
-      margin: 0.5rem;
-      padding: 0.7rem 1.2rem;
-      border-radius: 20px;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
-      font-weight: 500;
-      font-size: 0.95rem;
-      color: #444;
-    }
-
-    /* -------------------- RESEARCH SECTION (with parallax background) -------------------- */
-    .research {
-      width: 100%;
-      text-align: center;
-    }
-
-    .research__banner {
-      position: relative;
-      height: 500px;
-      /* Adjust as you like */
-      /* Force entire width to be shown (no cropping) */
-      background: url('https://raw.githubusercontent.com/SerranoLab/online/refs/heads/main/Banner.png') top center no-repeat;
-      background-size: 100% auto;
-      will-change: transform;
-      margin: 1rem 0;
-    }
-
-    .research .container h2 {
-      font-size: 2rem;
-      color: #1F74AF;
-      margin-bottom: 1.5rem;
-      text-align: center;
-    }
-
-    .research__projects {
-      text-align: left;
-      margin: 0 auto;
-      max-width: 800px;
-      list-style: disc;
-      padding-left: 1.2rem;
-      line-height: 1.6;
-    }
-
-    /* We'll add a simple parallax effect for the .research__banner */
-    .parallax-research {
-      background-attachment: fixed;
-    }
-
-    /* If you want a universal approach or for mobile fallback, 
-       you might remove "background-attachment: fixed" for smaller screens 
-       because iOS devices often disable background-attachment fixed. */
-    /* -------------------- TEAM SECTION (CARD STYLES) -------------------- */
-    .team {
-      width: 100%;
-      background: #f8f8f8;
-      text-align: center;
-    }
-
-    .team .container h2 {
-      color: #1F74AF;
-      font-size: 2rem;
-      margin-bottom: 2rem;
-      text-align: center;
-    }
-
-    .team__member {
-      background: #fff;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      max-width: 800px;
-      margin: 2rem auto;
-      padding: 1.5rem;
-      border-radius: 8px;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
-      text-align: left;
-    }
-
-    .team__photo {
-      width: 180px;
-      height: 180px;
-      object-fit: cover;
+    .values__tag {
+      background: var(--white);
+      padding: 0.55rem 1.2rem;
       border-radius: 100px;
-      margin-bottom: 1rem;
-      border: 3px solid #1F74AF;
+      font-weight: 500;
+      font-size: 0.9rem;
+      color: var(--gray-600);
+      border: 1px solid var(--gray-200);
+      transition: all 0.2s;
     }
+    .values__tag:hover { border-color: var(--blue); color: var(--blue); }
 
-    .team__info {
+    /* ============ RESEARCH ============ */
+    .research { background: var(--white); }
+    .research__banner {
       width: 100%;
+      max-width: var(--max-w);
+      margin: 0 auto 2rem;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.08);
     }
-
-    .team__info h3 {
-      font-size: 1.5rem;
-      margin-bottom: 0.3rem;
-      color: #1F74AF;
-    }
-
-    .team__info p {
-      margin-bottom: 0.8rem;
-      line-height: 1.5;
-    }
-
-    .team__info a {
-      color: #1F74AF;
-      font-weight: 600;
-    }
-
-    .team__past {
+    .research__banner img { width: 100%; height: auto; }
+    .research__intro {
       max-width: 800px;
-      margin: 2rem auto;
-      background: #fff;
-      padding: 1.5rem;
-      border-radius: 8px;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+      margin: 0 auto 3rem;
+      font-size: 1.05rem;
+      color: var(--gray-600);
+      text-align: center;
+      line-height: 1.8;
     }
+    .research__cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+    .research-card {
+      background: var(--gray-50);
+      border: 1px solid var(--gray-200);
+      border-radius: 10px;
+      padding: 1.8rem;
+      transition: all 0.25s;
+    }
+    .research-card:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(0,0,0,0.06); }
+    .research-card__icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, var(--blue), var(--blue-light));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--white);
+      font-size: 1.1rem;
+      margin-bottom: 1rem;
+    }
+    .research-card h3 {
+      font-size: 1.15rem;
+      color: var(--navy);
+      margin-bottom: 0.6rem;
+    }
+    .research-card p { font-size: 0.92rem; color: var(--gray-600); line-height: 1.65; }
 
-    .team__past-list p {
+    /* ============ SOFTWARE / TOOLS ============ */
+    .tools { background: var(--navy); color: var(--white); }
+    .tools .section-label { color: var(--blue-light); }
+    .tools__grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+    .tool-card {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 10px;
+      padding: 1.8rem;
+      transition: all 0.25s;
+    }
+    .tool-card:hover {
+      background: rgba(255,255,255,0.1);
+      border-color: rgba(255,255,255,0.2);
+      transform: translateY(-3px);
+    }
+    .tool-card__icon {
+      font-size: 1.5rem;
+      color: var(--blue-light);
+      margin-bottom: 0.8rem;
+    }
+    .tool-card h3 {
+      font-size: 1.1rem;
+      color: var(--white);
       margin-bottom: 0.5rem;
     }
-
-    /* -------------------- PUBLICATIONS SECTION -------------------- */
-    .publications {
-      width: 100%;
-      background-color: #f8f8f8;
-    }
-
-    .publications__content h2 {
-      color: #1F74AF;
-      font-size: 2rem;
-      text-align: center;
-      margin-bottom: 2rem;
-    }
-
-    .publications__content p {
-      margin-bottom: 1.5rem;
+    .tool-card p {
+      font-size: 0.88rem;
+      color: rgba(255,255,255,0.65);
       line-height: 1.6;
+      margin-bottom: 1rem;
+    }
+    .tool-card a {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--blue-light);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      transition: gap 0.2s;
+    }
+    .tool-card a:hover { gap: 0.6rem; }
+
+    /* ============ TEAM ============ */
+    .team { background: var(--gray-50); }
+    .team__grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+    .team-card {
+      background: var(--white);
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+      border: 1px solid var(--gray-200);
+      transition: all 0.25s;
+    }
+    .team-card:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(0,0,0,0.08); }
+    .team-card__img {
+      width: 100%;
+      height: 280px;
+      object-fit: cover;
+      object-position: center;
+    }
+    .team-card__body { padding: 1.5rem; }
+    .team-card__name {
+      font-size: 1.25rem;
+      color: var(--navy);
+      margin-bottom: 0.2rem;
+    }
+    .team-card__role {
+      font-size: 0.85rem;
+      color: var(--blue);
+      font-weight: 600;
+      margin-bottom: 0.8rem;
+    }
+    .team-card__bio { font-size: 0.9rem; color: var(--gray-600); line-height: 1.65; }
+    .team-card__bio a { color: var(--blue); font-weight: 600; }
+
+    .team__past-members {
+      max-width: 700px;
+      margin: 3rem auto 0;
+      text-align: center;
+    }
+    .team__past-members h3 {
+      font-size: 1.3rem;
+      color: var(--navy);
+      margin-bottom: 1rem;
+    }
+    .past-tags {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.5rem;
+    }
+    .past-tag {
+      background: var(--white);
+      border: 1px solid var(--gray-200);
+      padding: 0.4rem 1rem;
+      border-radius: 100px;
+      font-size: 0.85rem;
+      color: var(--gray-600);
+    }
+
+    /* ============ PUBLICATIONS ============ */
+    .publications { background: var(--white); }
+    .pub-list { max-width: 800px; margin: 0 auto; }
+    .pub-item {
+      padding: 1.5rem 0;
+      border-bottom: 1px solid var(--gray-200);
+    }
+    .pub-item:last-child { border-bottom: none; }
+    .pub-item__year {
+      font-family: var(--font-body);
+      font-weight: 700;
+      font-size: 0.78rem;
+      letter-spacing: 1px;
+      color: var(--blue);
+      display: inline-block;
+      margin-bottom: 0.4rem;
+    }
+    .pub-item__new {
+      display: inline-block;
+      background: linear-gradient(135deg, var(--coral), var(--coral-light));
+      color: var(--white);
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      margin-left: 0.5rem;
+      vertical-align: middle;
+      text-transform: uppercase;
+    }
+    .pub-item__title {
+      font-family: var(--font-body);
+      font-weight: 600;
+      font-size: 1rem;
+      color: var(--gray-800);
+      line-height: 1.5;
+      margin-bottom: 0.3rem;
+    }
+    .pub-item__authors {
+      font-size: 0.88rem;
+      color: var(--gray-600);
+      margin-bottom: 0.3rem;
+    }
+    .pub-item__journal {
+      font-size: 0.88rem;
+      color: var(--gray-400);
+      font-style: italic;
+    }
+    .pub-item__link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--blue);
+      margin-top: 0.4rem;
+      transition: gap 0.2s;
+    }
+    .pub-item__link:hover { gap: 0.5rem; }
+
+    /* ============ FUNDING ============ */
+    .funding { background: var(--gray-50); }
+    .funding__grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.2rem;
+      margin-top: 2rem;
       max-width: 800px;
-      margin: 0 auto 1.5rem;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .funding-card {
+      background: var(--white);
+      border: 1px solid var(--gray-200);
+      border-radius: 8px;
+      padding: 1.4rem;
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+    }
+    .funding-card__icon {
+      flex-shrink: 0;
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      background: var(--gray-100);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--coral);
+      font-size: 0.9rem;
+    }
+    .funding-card__text h4 {
+      font-family: var(--font-body);
+      font-weight: 600;
+      font-size: 0.95rem;
+      color: var(--gray-800);
+      margin-bottom: 0.2rem;
+    }
+    .funding-card__text p {
+      font-size: 0.83rem;
+      color: var(--gray-400);
     }
 
-    .publications__content a {
-      text-decoration: underline;
-      color: #1F74AF;
-    }
-
-    /* -------------------- CREM FEATURE SECTION -------------------- */
+    /* ============ CReM ============ */
     .crem {
-      width: 100%;
-      background-color: #ffffff;
+      background: linear-gradient(135deg, var(--blue), var(--blue-light));
+      color: var(--white);
       text-align: center;
     }
+    .crem .section-label { color: rgba(255,255,255,0.7); }
+    .crem .section-title { color: var(--white); }
+    .crem p { max-width: 600px; margin: 0 auto 2rem; font-size: 1.05rem; opacity: 0.9; }
 
-    .crem__content h2 {
-      color: #1F74AF;
-      font-size: 2rem;
-      margin-bottom: 1.5rem;
+    /* ============ PATIENT PARTNERSHIP ============ */
+    .patient { background: var(--white); }
+    .patient__content {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: center;
+      margin-top: 2rem;
     }
-
-    .crem__content p {
-      max-width: 800px;
-      margin: 0.5rem auto 1.5rem auto;
-      font-size: 1rem;
-      line-height: 1.6;
+    .patient__text p { color: var(--gray-600); margin-bottom: 1rem; }
+    .patient__text a { color: var(--blue); font-weight: 600; }
+    .patient__links { margin-top: 1rem; }
+    .patient__links li {
+      margin-bottom: 0.6rem;
+      font-size: 0.92rem;
     }
-
-    /* -------------------- PATIENT-PARTNERED APPROACH -------------------- */
-    .patient-approach {
-      width: 100%;
-      background-color: #f8f8f8;
-      text-align: center;
+    .patient__links a {
+      color: var(--blue);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
     }
-
-    .patient-approach__content h2 {
-      color: #1F74AF;
-      font-size: 2rem;
-      text-align: center;
-      margin-bottom: 1.5rem;
-    }
-
-    .patient-approach__content p,
-    .patient-approach__content ul {
-      font-size: 1rem;
-      line-height: 1.6;
-      max-width: 800px;
-      margin: 1rem auto;
-      text-align: left;
-    }
-
-    .patient-approach__content a {
-      text-decoration: underline;
-      color: #1F74AF;
-    }
-
-    /* Responsive embedded video (YouTube) */
-    .video-container {
+    .patient__links a:hover { text-decoration: underline; }
+    .video-wrapper {
       position: relative;
       width: 100%;
-      padding-bottom: 56.25%;
-      /* 16:9 ratio */
-      height: 0;
-      margin: 1.5rem 0;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+      cursor: pointer;
+      aspect-ratio: 16/9;
+      background: var(--gray-900);
     }
-
-    .video-container iframe {
+    .video-thumb {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .video-play {
       position: absolute;
-      top: 0;
-      left: 0;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      border: none;
+      background: rgba(31, 116, 175, 0.9);
+      color: var(--white);
+      font-size: 1.4rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.25s;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+    }
+    .video-play i { margin-left: 3px; }
+    .video-play:hover { background: var(--blue); transform: translate(-50%, -50%) scale(1.08); }
+    .video-wrapper iframe {
+      position: absolute;
+      inset: 0;
       width: 100%;
       height: 100%;
       border: 0;
     }
 
-    /* -------------------- ACCOMPLISHMENTS -------------------- */
-    .accomplishments {
-      width: 100%;
-      background: #f8f8f8;
-      text-align: center;
+    /* ============ ACCOMPLISHMENTS ============ */
+    .accomplishments { background: var(--gray-50); }
+    .accomplishments__grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+      margin-top: 2rem;
     }
-
-    .accomplishments .container h2 {
-      color: #1F74AF;
-      font-size: 2rem;
-      margin-bottom: 2rem;
-      text-align: center;
+    .acc-card {
+      background: var(--white);
+      border: 1px solid var(--gray-200);
+      border-radius: 10px;
+      padding: 1.8rem;
     }
-
-    .accomplishments__item {
-      background: #fff;
-      max-width: 800px;
-      margin: 2rem auto;
-      padding: 1.5rem;
-      border-radius: 8px;
-      text-align: left;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    .acc-card h3 {
+      font-size: 1.1rem;
+      color: var(--navy);
+      margin-bottom: 0.8rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
     }
-
-    .accomplishments__item h3 {
-      font-size: 1.3rem;
-      margin-bottom: 1rem;
-      color: #1F74AF;
-    }
-
-    .accomplishments__item ul {
-      list-style: disc;
-      padding-left: 1.2rem;
-    }
-
-    .accomplishments__item ul li {
-      margin-bottom: 0.5rem;
-    }
-
-    /* -------------------- RESOURCES -------------------- */
-    .resources {
-      width: 100%;
-      text-align: center;
-    }
-
-    .resources .container h2 {
-      color: #1F74AF;
-      font-size: 2rem;
-      margin-bottom: 1.5rem;
-    }
-
-    .resources .container p {
-      margin: 1rem auto;
+    .acc-card h3 i { color: var(--coral); font-size: 0.9rem; }
+    .acc-card li {
+      font-size: 0.9rem;
+      color: var(--gray-600);
       line-height: 1.6;
-      max-width: 800px;
+      margin-bottom: 0.5rem;
+      padding-left: 1rem;
+      position: relative;
+    }
+    .acc-card li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0.55em;
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--blue);
     }
 
-    .resources .container a {
-      color: #1F74AF;
-      text-decoration: underline;
-    }
-
-    /* -------------------- DONATION SECTION -------------------- */
-    .donate {
-      width: 100%;
-      background: #f8f8f8;
-      text-align: center;
-    }
-
-    .donate .container h2 {
-      color: #1F74AF;
-      font-size: 2rem;
-      margin-bottom: 1rem;
-      text-align: center;
-    }
-
-    .donate .container p {
-      max-width: 800px;
-      margin: 0.5rem auto;
-      line-height: 1.5;
-    }
-
-    .donate .container a {
-      color: #1F74AF;
-      text-decoration: underline;
-    }
-
-    /* -------------------- DEI SECTION -------------------- */
-    .dei {
-      width: 100%;
-    }
-
-    .dei .container h2 {
-      color: #1F74AF;
-      font-size: 2rem;
-      text-align: center;
-      margin-bottom: 2rem;
-    }
-
-    .dei__content {
+    /* ============ DEI ============ */
+    .dei { background: var(--white); }
+    .dei__text {
       max-width: 800px;
       margin: 0 auto;
-      text-align: left;
+      column-count: 2;
+      column-gap: 3rem;
+    }
+    .dei__text p { color: var(--gray-600); margin-bottom: 1rem; font-size: 0.95rem; break-inside: avoid; }
+    .dei__text p:first-child::first-letter {
+      font-family: var(--font-display);
+      font-size: 3rem;
+      float: left;
+      line-height: 1;
+      margin-right: 0.3rem;
+      color: var(--blue);
     }
 
-    .dei__content h3 {
-      font-size: 1.3rem;
-      margin-bottom: 0.5rem;
-      color: #1F74AF;
-    }
-
-    .dei__content p {
-      margin-bottom: 1rem;
-      line-height: 1.6;
-    }
-
-    /* -------------------- CONTACT SECTION -------------------- */
-    .contact {
-      width: 100%;
-      text-align: center;
-    }
-
-    .contact .container h2 {
-      color: #1F74AF;
-      font-size: 2rem;
-      margin-bottom: 1rem;
-      text-align: center;
-    }
-
-    .contact .container p {
-      margin-bottom: 2rem;
-      max-width: 800px;
+    /* ============ CONTACT ============ */
+    .contact { background: var(--gray-50); }
+    .contact__inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      margin-top: 2rem;
+      max-width: 900px;
       margin-left: auto;
       margin-right: auto;
     }
-
+    .contact__info p { color: var(--gray-600); margin-bottom: 1rem; }
+    .contact__info a { color: var(--blue); font-weight: 600; }
     .contact__form {
-      background: #f8f8f8;
+      background: var(--white);
       padding: 2rem;
-      border-radius: 8px;
-      max-width: 600px;
-      margin: 0 auto;
-      text-align: left;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+      border-radius: 10px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+      border: 1px solid var(--gray-200);
     }
-
-    .contact__form-group {
-      margin-bottom: 1.2rem;
-    }
-
-    .contact__form-group label {
+    .form-group { margin-bottom: 1.2rem; }
+    .form-group label {
       display: block;
       font-weight: 600;
+      font-size: 0.88rem;
       margin-bottom: 0.4rem;
+      color: var(--gray-800);
     }
-
-    .contact__form-group input,
-    .contact__form-group textarea {
+    .form-group input, .form-group textarea {
       width: 100%;
-      padding: 0.75rem;
-      border: 2px solid #ccc;
-      border-radius: 4px;
-      font-family: 'Open Sans', sans-serif;
-      font-size: 1rem;
-      transition: border-color 0.3s ease;
+      padding: 0.7rem 1rem;
+      border: 2px solid var(--gray-200);
+      border-radius: 6px;
+      font-family: var(--font-body);
+      font-size: 0.95rem;
+      transition: border-color 0.2s;
+      background: var(--gray-50);
     }
-
-    .contact__form-group input:focus,
-    .contact__form-group textarea:focus {
-      border-color: #1F74AF;
+    .form-group input:focus, .form-group textarea:focus {
+      border-color: var(--blue);
       outline: none;
+      background: var(--white);
     }
 
-    .contact__form button {
-      display: inline-block;
-      margin-top: 1rem;
-    }
-
-    /* -------------------- FOOTER -------------------- */
-    footer {
-      background: #333;
-      color: #fff;
+    /* ============ DONATE BANNER ============ */
+    .donate {
+      background: linear-gradient(135deg, var(--coral), var(--coral-light));
+      color: var(--white);
       text-align: center;
-      padding: 1.5rem;
+      padding: 3.5rem 1.5rem;
     }
-
-    .footer__text {
-      font-size: 0.9rem;
+    .donate h2 { font-size: 1.8rem; color: var(--white); margin-bottom: 1rem; }
+    .donate p { max-width: 550px; margin: 0 auto 1.5rem; opacity: 0.95; }
+    .donate .btn {
+      background: var(--white);
+      color: var(--coral);
     }
+    .donate .btn:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,0.15); }
 
-    /* -------------------- RESPONSIVE MEDIA QUERIES -------------------- */
+    /* ============ FOOTER ============ */
+    footer {
+      background: var(--gray-900);
+      color: rgba(255,255,255,0.5);
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.85rem;
+    }
+    footer a { color: rgba(255,255,255,0.7); }
+    footer a:hover { color: var(--white); }
+
+    /* ============ SCROLL ANIMATIONS ============ */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .fade-up.visible { opacity: 1; transform: translateY(0); }
+
+    /* ============ BACK TO TOP ============ */
+    .back-to-top {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: var(--blue);
+      color: var(--white);
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      box-shadow: 0 4px 14px rgba(31,116,175,0.3);
+      opacity: 0;
+      transform: translateY(10px);
+      transition: all 0.3s;
+      z-index: 99;
+      pointer-events: none;
+    }
+    .back-to-top.show {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+    .back-to-top:hover { background: var(--blue-dark); transform: translateY(-2px); }
+
+    /* ============ PI CARD HIGHLIGHT ============ */
+    .team-card--pi { border: 2px solid var(--blue); }
+    .team-card--pi .team-card__role { color: var(--coral); }
+
+    /* ============ RESPONSIVE ============ */
+    @media (max-width: 900px) {
+      .patient__content { grid-template-columns: 1fr; }
+      .contact__inner { grid-template-columns: 1fr; }
+      .dei__text { column-count: 1; }
+      .focus-strip__inner { gap: 1.5rem; }
+      .focus-strip__divider { display: none; }
+    }
     @media (max-width: 768px) {
-      .hero__title {
-        font-size: 2.2rem;
-      }
-
-      .hero__subtitle {
-        font-size: 1rem;
-        margin: 0 1rem;
-      }
-
-      .values__list {
+      .hamburger { display: block; }
+      .nav__links {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: var(--white);
         flex-direction: column;
+        padding: 1rem 2rem;
+        border-bottom: 1px solid var(--gray-200);
+        box-shadow: 0 8px 20px rgba(0,0,0,0.06);
       }
-
-      .team__member {
-        text-align: center;
-      }
-
-      /* iOS doesn't always respect background-attachment:fixed, so consider removing 
-         or toggling for mobile if it looks off. */
-      .research__banner {
-        background-attachment: scroll !important;
-      }
+      .nav__links.open { display: flex; }
+      .nav__link { width: 100%; padding: 0.7rem 0; }
+      .hero__title { font-size: 2rem; }
+      .team__grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 480px) {
+      .focus-strip__inner { flex-direction: column; text-align: center; gap: 1.2rem; padding: 1.5rem; }
+      .focus-strip__item { flex-direction: column; gap: 0.4rem; }
+      .focus-strip__divider { width: 40px; height: 1px; }
     }
   </style>
 </head>
 
 <body>
-  <!-- ==================== HEADER / NAVIGATION ==================== -->
-  <header>
+  <!-- ========== HEADER ========== -->
+  <header id="header">
     <nav>
       <div class="nav__logo">
         <a href="#home">
           <img src="https://raw.githubusercontent.com/SerranoLab/online/refs/heads/main/Serrano_Primary_Color.png" alt="Serrano Lab Logo" />
         </a>
       </div>
-      <ul class="nav__links">
+      <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav__links" id="navLinks">
         <li><a href="#home" class="nav__link">Home</a></li>
         <li><a href="#research" class="nav__link">Research</a></li>
+        <li><a href="#tools" class="nav__link">Software</a></li>
         <li><a href="#team" class="nav__link">Team</a></li>
-        <li><a href="#patient-approach" class="nav__link">Patient Partnership</a></li>
+        <li><a href="#publications" class="nav__link">Publications</a></li>
+        <li><a href="#patient" class="nav__link">Partnership</a></li>
         <li><a href="#dei" class="nav__link">DEI</a></li>
-        <li><a href="#donate" class="nav__link">Donate</a></li>
         <li><a href="#contact" class="nav__link">Contact</a></li>
       </ul>
     </nav>
   </header>
 
-  <!-- ==================== HERO (PARALLAX) SECTION ==================== -->
+  <!-- ========== HERO ========== -->
   <section class="hero" id="home">
+    <div class="hero__bg"></div>
     <div class="hero__overlay"></div>
     <div class="hero__content">
+      <p class="hero__tag">Boston University &middot; Center for Regenerative Medicine</p>
       <h1 class="hero__title">The Serrano Lab</h1>
       <p class="hero__subtitle">
-        Advancing our understanding of rare epigenetic disorders affecting
-        cardiovascular and neurodevelopment through collaborative, rigorous,
-        and patient-partnered developmental biology research.
+        Investigating how chromatin regulators control developmental timing in rare pediatric epigenetic disorders&mdash;bridging patient-partnered research with innovative single-cell technologies.
       </p>
-      <a href="#values" class="btn btn--primary">Learn More</a>
+      <div class="hero__ctas">
+        <a href="#research" class="btn btn--coral">Our Research</a>
+        <a href="#tools" class="btn btn--outline">EpiFlow Platform</a>
+      </div>
     </div>
   </section>
 
-  <!-- ==================== CORE VALUES SECTION ==================== -->
+  <!-- ========== FOCUS STRIP ========== -->
+  <section class="focus-strip">
+    <div class="focus-strip__inner">
+      <div class="focus-strip__item fade-up">
+        <i class="fas fa-dna"></i>
+        <div>
+          <strong>KMT2D &middot; KAT6A &middot; KAT6B</strong>
+          <span>Histone modifiers in rare disease</span>
+        </div>
+      </div>
+      <div class="focus-strip__divider"></div>
+      <div class="focus-strip__item fade-up">
+        <i class="fas fa-fish"></i>
+        <div>
+          <strong>Zebrafish &amp; Human iPSCs</strong>
+          <span>Cross-species developmental models</span>
+        </div>
+      </div>
+      <div class="focus-strip__divider"></div>
+      <div class="focus-strip__item fade-up">
+        <i class="fas fa-users"></i>
+        <div>
+          <strong>Patient-Partnered</strong>
+          <span>KAT6 Foundation collaboration</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== VALUES ========== -->
   <section class="values" id="values">
-    <div class="container">
-      <h2>Our Core Values</h2>
-      <ul class="values__list">
-        <li>Scientific rigor</li>
-        <li>Communication</li>
-        <li>Kindness</li>
-        <li>Honesty</li>
-        <li>Open Source Biology</li>
-        <li>People-centered</li>
-        <li>Self-respect</li>
-        <li>Collaborative spirit</li>
-        <li>Leadership by example</li>
-      </ul>
+    <div class="container" style="text-align:center;">
+      <span class="section-label">What Drives Us</span>
+      <h2 class="section-title">Our Core Values</h2>
+      <div class="values__grid fade-up">
+        <span class="values__tag">Scientific Rigor</span>
+        <span class="values__tag">Communication</span>
+        <span class="values__tag">Kindness</span>
+        <span class="values__tag">Honesty</span>
+        <span class="values__tag">Open Source Biology</span>
+        <span class="values__tag">People-Centered</span>
+        <span class="values__tag">Self-Respect</span>
+        <span class="values__tag">Collaborative Spirit</span>
+        <span class="values__tag">Leadership by Example</span>
+      </div>
     </div>
   </section>
 
-  <!-- ==================== RESEARCH SECTION WITH PARALLAX BANNER ==================== -->
+  <!-- ========== RESEARCH ========== -->
   <section class="research" id="research">
-    <!-- Parallax banner (full width) -->
-    <div class="research__banner parallax-research"></div>
     <div class="container">
-      <h2>Research</h2>
-      <p>
-        Our lab currently studies three histone modifiers with essential roles during development and disease:
-        the histone methyltransferase <strong>KMT2D</strong> and the histone acetyltransferases
-        <strong>KAT6A</strong> and <strong>KAT6B</strong>. To understand their roles in
-        development and their implications in disease, we use diverse research models,
-        including zebrafish, human induced pluripotent stem cells (iPSCs), and primary cells.
-      </p>
-    </div>
+      <span class="section-label">What We Study</span>
+      <h2 class="section-title" style="text-align:center;">Research</h2>
 
-    <div class="container">
-      <h3>Current Lab Projects:</h3>
-      <ul class="research__projects">
-        <li>
-          Advancing basic knowledge of histone H3 modifiers in cell processes and
-          lineages relevant to Kabuki Syndrome and KAT6-related disorders.
-        </li>
-        <li>
-          Understanding how KMT2D influences neuronal progenitor cell heterogeneity
-          and lineage potential using KMT2D loss-of-function models.
-        </li>
-        <li>
-          Investigating the role of KMT2D in shaping ontogeny-specific pericyte histone
-          landscapes during development.
-        </li>
-        <li>
-          Defining how KMT2D influences endothelial tip and stalk cell selection during
-          sprouting angiogenesis.
-        </li>
-        <li>
-          Exploring disease mechanisms driven by pathogenic variants in histone H3 modifiers.
-        </li>
-        <li>
-          Identifying shared mechanisms across distinct diseases and cell lineages.
-        </li>
-      </ul>
+      <div class="research__banner fade-up">
+        <img src="https://raw.githubusercontent.com/SerranoLab/online/refs/heads/main/Banner.png" alt="Serrano Lab Research Banner" />
+      </div>
+
+      <p class="research__intro fade-up">
+        Our lab investigates how haploinsufficiency of chromatin regulators&mdash;the histone methyltransferase <strong>KMT2D</strong> and the histone acetyltransferases <strong>KAT6A</strong> and <strong>KAT6B</strong>&mdash;disrupts progenitor cell fate in rare pediatric epigenetic disorders. We test whether chromatin regulators control a conserved developmental timing program across cardiac and neural fate transitions, using zebrafish and human iPSC models.
+      </p>
+
+      <div class="research__cards">
+        <div class="research-card fade-up">
+          <div class="research-card__icon"><i class="fas fa-brain"></i></div>
+          <h3>Neural Progenitor Timing</h3>
+          <p>Understanding how KMT2D deficiency causes premature but unstable activation of lineage transcription factors and accelerated G1 accumulation in neural progenitors, with dose-dependent effects relevant to patient haploinsufficiency.</p>
+        </div>
+        <div class="research-card fade-up">
+          <div class="research-card__icon"><i class="fas fa-heartbeat"></i></div>
+          <h3>Cardiovascular Development</h3>
+          <p>Investigating KMT2D's role in Notch-mediated cardiovascular patterning, endothelial tip/stalk cell selection during sprouting angiogenesis, and ontogeny-specific pericyte histone landscapes.</p>
+        </div>
+        <div class="research-card fade-up">
+          <div class="research-card__icon"><i class="fas fa-dna"></i></div>
+          <h3>Conserved Timing Mechanisms</h3>
+          <p>Testing whether disrupted developmental timing is a shared pathogenic mechanism across KMT2D, KAT6A/B, and related chromatinopathies using dense developmental time courses and cross-species functional rescue.</p>
+        </div>
+        <div class="research-card fade-up">
+          <div class="research-card__icon"><i class="fas fa-microscope"></i></div>
+          <h3>EpiFlow Technology</h3>
+          <p>Developing high-throughput spectral flow cytometry platforms that multiplex histone H3 modifications with cell cycle and lineage markers at single-cell resolution to detect subtle chromatin changes in heterogeneous populations.</p>
+        </div>
+        <div class="research-card fade-up">
+          <div class="research-card__icon"><i class="fas fa-fish"></i></div>
+          <h3>Zebrafish Models</h3>
+          <p>Using the kmt2d<sup>zy59</sup> null line and zebrafish xenotransplantation to validate in vivo developmental timing signatures and test functional rescue strategies for Kabuki syndrome.</p>
+        </div>
+        <div class="research-card fade-up">
+          <div class="research-card__icon"><i class="fas fa-users"></i></div>
+          <h3>Patient iPSC Biobank</h3>
+          <p>Maintaining a centralized biobank of KAT6A/B patient-derived iPSC lines in partnership with the KAT6 Foundation, with transparent tracking and demographic diversity prioritized.</p>
+        </div>
+      </div>
     </div>
   </section>
 
-  <!-- ==================== TEAM SECTION ==================== -->
+  <!-- ========== SOFTWARE & TOOLS ========== -->
+  <section class="tools" id="tools">
+    <div class="container">
+      <span class="section-label">Open-Source Ecosystem</span>
+      <h2 class="section-title section-title--light">Software &amp; Tools</h2>
+      <div class="tools__grid">
+        <div class="tool-card fade-up">
+          <div class="tool-card__icon"><i class="fas fa-chart-bar"></i></div>
+          <h3>EpiFlow Analysis Platform</h3>
+          <p>R Shiny application for analyzing spectral flow cytometry data with focus on histone post-translational modification profiling, statistical modeling, and visualization.</p>
+          <a href="https://serranolab.shinyapps.io/EpiFlow_Analysis/" target="_blank">Launch App <i class="fas fa-arrow-right"></i></a>
+        </div>
+        <div class="tool-card fade-up">
+          <div class="tool-card__icon"><i class="fas fa-palette"></i></div>
+          <h3>Spectral Panel Builder</h3>
+          <p>Instrument-aware panel design tool with spectral conflict detection, optimized for the Cytek Aurora 5L.</p>
+          <a href="https://serranolab.github.io/EpiFlow_Builder/" target="_blank">Launch App <i class="fas fa-arrow-right"></i></a>
+        </div>
+        <div class="tool-card fade-up">
+          <div class="tool-card__icon"><i class="fas fa-exchange-alt"></i></div>
+          <h3>OMIQ&rarr;EpiFlow Converter</h3>
+          <p>Transforms flow cytometry data with automated cell cycle gating for seamless integration with the EpiFlow analysis ecosystem.</p>
+          <a href="https://serranolab.shinyapps.io/File_EpiFlow_converter/" target="_blank">Launch App <i class="fas fa-arrow-right"></i></a>
+        </div>
+        <div class="tool-card fade-up">
+          <div class="tool-card__icon"><i class="fas fa-database"></i></div>
+          <h3>KAT6 iPSC Biobank Dashboard</h3>
+          <p>Transparent tracking dashboard for patient-derived iPSC lines, enabling researchers and patient families to monitor biobank status.</p>
+          <a href="https://serranolab.github.io/iKAT6_BANK/" target="_blank">View Dashboard <i class="fas fa-arrow-right"></i></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== TEAM ========== -->
   <section class="team" id="team">
     <div class="container">
-      <h2>Our Team</h2>
+      <span class="section-label">Our People</span>
+      <h2 class="section-title" style="text-align:center;">The Team</h2>
 
-      <!-- Angie Serrano -->
-      <div class="team__member">
-        <img src="https://raw.githubusercontent.com/SerranoLab/online/refs/heads/main/Angie%20Serrano.jpeg" alt="Photo of Angie Serrano" class="team__photo" />
-        <div class="team__info">
-          <h3>Angie Serrano</h3>
-          <p><em>Principal Investigator | <a href="mailto:maserr@bu.edu">maserr@bu.edu</a></em></p>
-          <p>Assistant Professor of Medicine at the Center for Regenerative Medicine (CReM), Boston University.</p>
-          <p>
-            <strong>About Angie:</strong><br />
-            Angie is originally from Argentina. After her training at the University of Utah
-            in the Yost Lab, she joined Boston University in 2022 to establish her research group.
-            Her lab studies rare diseases arising from pathogenic variants in histone modifiers,
-            emphasizing vascular and neurodevelopmental biology. In her free time, Angie enjoys
-            riding with her family, home coffee roasting, and horror movies!
-          </p>
-          <a href="https://www.bumc.bu.edu/camed/profile/maria-de-los-angeles-serrano/" class="btn">More About Our PI</a>
+      <div class="team__grid">
+        <!-- Angie -->
+        <div class="team-card team-card--pi fade-up">
+          <img src="https://raw.githubusercontent.com/SerranoLab/online/refs/heads/main/Angie%20Serrano.jpeg" alt="Photo of Angie Serrano" class="team-card__img" />
+          <div class="team-card__body">
+            <h3 class="team-card__name">Angie Serrano</h3>
+            <p class="team-card__role">Principal Investigator</p>
+            <p class="team-card__bio">
+              Assistant Professor of Medicine at CReM, Boston University. Originally from Argentina. Trained at the University of Utah with H. Joseph Yost. Studies rare epigenetic disorders affecting cardiovascular and neurodevelopment. Scientific Advisor to the KAT6 Foundation. Outside the lab, Angie enjoys riding with her family, home coffee roasting, and horror movies.
+              <br /><br />
+              <a href="https://www.bumc.bu.edu/camed/profile/maria-de-los-angeles-serrano/" target="_blank">Faculty Profile &rarr;</a>
+            </p>
+          </div>
+        </div>
+
+        <!-- Carly -->
+        <div class="team-card fade-up">
+          <img src="https://raw.githubusercontent.com/SerranoLab/online/refs/heads/main/Carly%20Golden.png" alt="Photo of Carly Golden" class="team-card__img" />
+          <div class="team-card__body">
+            <h3 class="team-card__name">Carly Golden</h3>
+            <p class="team-card__role">PhD Candidate</p>
+            <p class="team-card__bio">
+              B.Sc. from Mansfield University, M.Sc. from Brandeis. Former AAV gene therapy industry experience. Studies how KMT2D controls neural progenitor cell development using single-cell multiomics, spectral flow cytometry, and stem cell models. Co-developed EpiFlow.
+            </p>
+          </div>
+        </div>
+
+        <!-- Sandeep -->
+        <div class="team-card fade-up">
+          <img src="https://raw.githubusercontent.com/SerranoLab/online/refs/heads/main/Sandeep%20Sreerama.jpeg" alt="Photo of Sandeep Sreerama" class="team-card__img" />
+          <div class="team-card__body">
+            <h3 class="team-card__name">Sandeep Sreerama</h3>
+            <p class="team-card__role">MD/PhD Candidate</p>
+            <p class="team-card__bio">
+              B.Sc. from University of Central Florida. BU MD/PhD program, Molecular and Translational Medicine. Researches pericyte biology, developmental precursors, and the epigenetic modifier KMT2D in zebrafish and iPSC models.
+            </p>
+          </div>
+        </div>
+
+        <!-- Sandra -->
+        <div class="team-card fade-up">
+          <img src="https://raw.githubusercontent.com/SerranoLab/online/refs/heads/main/Sandra.jpg" alt="Photo of Sandra Sulser Ponce De Leon" class="team-card__img" />
+          <div class="team-card__body">
+            <h3 class="team-card__name">Sandra Sulser Ponce De Leon</h3>
+            <p class="team-card__role">PhD Candidate</p>
+            <p class="team-card__bio">
+              Originally from Mexico City. Registered Dietitian with an M.Sc. in Nutrition and Metabolism. Studies how KMT2D regulates endothelial tip and stalk cell selection during sprouting angiogenesis using iPSC-derived endothelial cells and zebrafish.
+            </p>
+          </div>
         </div>
       </div>
 
-      <!-- Carly Golden -->
-      <div class="team__member">
-        <img src="https://raw.githubusercontent.com/SerranoLab/online/refs/heads/main/Carly%20Golden.png" alt="Photo of Carly Golden" class="team__photo" />
-        <div class="team__info">
-          <h3>Carly Golden</h3>
-          <p><em>PhD Candidate</em></p>
-          <p>
-            <strong>About Carly:</strong><br />
-            Carly earned her B.Sc. in Biology from Mansfield University, studying biofluorescence
-            in coral. She completed her M.Sc. in Molecular and Cellular Biology at Brandeis University,
-            investigating actin-regulating proteins. Before returning to graduate school, she worked
-            at several companies developing AAV gene therapies for rare diseases. In the Serrano Lab,
-            she studies how the epigenetic regulator KMT2D controls neural progenitor cell development
-            using single-cell multiomics, spectral flow cytometry, and stem cell models. Outside the lab,
-            Carly enjoys hiking, cooking new recipes, and staying engaged with the rare disease community.
-          </p>
-        </div>
-      </div>
-
-      <!-- Sandeep Sreerama -->
-      <div class="team__member">
-        <img src="https://raw.githubusercontent.com/SerranoLab/online/refs/heads/main/Sandeep%20Sreerama.jpeg" alt="Photo of Sandeep Sreerama" class="team__photo" />
-        <div class="team__info">
-          <h3>Sandeep Sreerama</h3>
-          <p><em>MD/PhD Candidate</em></p>
-          <p>
-            <strong>About Sandeep:</strong><br />
-            Sandeep graduated from the University of Central Florida with a B.Sc. in Biomedical
-            Science and Biotechnology, joining Boston University's MD/PhD program in 2021.
-            He is a PhD Candidate in the Molecular and Translational Medicine program in Dr. Serrano’s lab,
-            researching pericyte biology, their developmental precursors, and the epigenetic
-            modifier KMT2D. Sandeep enjoys board games with friends and exploring local restaurants.
-          </p>
-        </div>
-      </div>
-
-      <!-- Sandra Sulser Ponce De Leon -->
-      <div class="team__member">
-        <img src="https://raw.githubusercontent.com/SerranoLab/online/refs/heads/main/Sandra.jpg" alt="Photo of Sandra Sulser Ponce De Leon" class="team__photo" />
-        <div class="team__info">
-          <h3>Sandra Sulser Ponce De Leon</h3>
-          <p><em>PhD Candidate</em></p>
-          <p>
-            <strong>About Sandra:</strong><br />
-            Sandra is originally from Mexico City, where she began her career as a Registered Dietitian.
-            Her passion for studying molecular mechanisms of metabolism and chronic diseases brought her
-            to Boston, where she earned an MSc. in Nutrition and Metabolism. Currently, Sandra studies
-            how KMT2D regulates endothelial cell identity during angiogenesis, specifically in tip
-            and stalk cell selection and shuffling, using iPSC-derived endothelial cells and
-            zebrafish models.
-          </p>
-        </div>
-      </div>
-
-      <!-- Past Members (no bullet points) -->
-      <div class="team__past">
+      <!-- Past members -->
+      <div class="team__past-members fade-up">
         <h3>Past Members</h3>
-        <div class="team__past-list">
-          <p>Zoe Hoffmann Kamrat (Undergraduate Summer Internship)</p>
-          <p>Christopher Buie (AHA SURE Fellow)</p>
-          <p>Irena Feng (MD/PhD Rotation Student)</p>
-          <p>Sophia Blankevoort (Undergraduate Summer Internship)</p>
-          <p>Emilia Serrano (Undergraduate Summer Internship)</p>
-          <p>Jack Nelson (PhD Rotation Student)</p>
-          <p>Saylor Williams (Lab Manager)</p>
+        <div class="past-tags">
+          <span class="past-tag">Saylor Williams, Lab Manager</span>
+          <span class="past-tag">Zoe Hoffmann Kamrat</span>
+          <span class="past-tag">Christopher Buie, AHA SURE Fellow</span>
+          <span class="past-tag">Irena Feng, MD/PhD Rotation</span>
+          <span class="past-tag">Sophia Blankevoort</span>
+          <span class="past-tag">Emilia Serrano</span>
+          <span class="past-tag">Jack Nelson, PhD Rotation</span>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ==================== PUBLICATIONS SECTION ==================== -->
+  <!-- ========== PUBLICATIONS ========== -->
   <section class="publications" id="publications">
-    <div class="container publications__content">
-      <h2>Publications</h2>
+    <div class="container">
+      <span class="section-label">Our Work</span>
+      <h2 class="section-title" style="text-align:center;">Publications</h2>
 
-      <p>
-        <strong>Moreira-Bouchard JD, Cunha J, Tao BS, Kim H, Lepson J, Nessen EJ, Milstone ZJ, Fisher N, Clinton N, Roberts LM, Serrano MA, Gopal DM, Benjamin EJ, So-Armah K, Fetterman JL.</strong><br />
-        Creating diversity, equity, inclusion, and accessibility statements for your CV: a resource guide to effectiveness and comprehensiveness. Epub 2024 Nov 1. PMID: 39485298.<br />
-        <a href="https://www.ncbi.nlm.nih.gov/pubmed/39485298/" target="_blank">Link</a>
-      </p>
+      <div class="pub-list">
+        <!-- NEW: Golden et al. 2025 -->
+        <div class="pub-item fade-up">
+          <span class="pub-item__year">2025</span><span class="pub-item__new">New</span>
+          <p class="pub-item__title">KMT2D-deficiency destabilizes lineage progression in immature neural progenitors</p>
+          <p class="pub-item__authors">Golden CS, Bawa P, Wang F, Sulser Ponce De Leon S, Bodamer O, Yost HJ, Serrano MA</p>
+          <p class="pub-item__journal">Epigenetics Reports, 2025</p>
+          <a href="https://doi.org/10.1080/28361512.2025.2599802" target="_blank" class="pub-item__link">Read Paper <i class="fas fa-arrow-right"></i></a>
+        </div>
 
-      <p>
-        <strong>Golden CS, Williams S, Blankevoort S, Belkina A, Yost HJ, Serrano MA.</strong><br />
-        Nuclear Histone 3 Post-translational Modification Profiling in Whole Cells using Spectral Flow Cytometry. bioRxiv. 2024 Nov. doi: 10.1101/2024.10.03.616268.<br />
-        <a href="https://www.biorxiv.org/content/10.1101/2024.10.03.616268v1" target="_blank">Link</a>
-      </p>
+        <!-- Moreira-Bouchard 2024 -->
+        <div class="pub-item fade-up">
+          <span class="pub-item__year">2024</span>
+          <p class="pub-item__title">Creating diversity, equity, inclusion, and accessibility statements for your CV: a resource guide</p>
+          <p class="pub-item__authors">Moreira-Bouchard JD, Cunha J, Tao BS, Kim H, Lepson J, Nessen EJ, Milstone ZJ, Fisher N, Clinton N, Roberts LM, Serrano MA, Gopal DM, Benjamin EJ, So-Armah K, Fetterman JL</p>
+          <p class="pub-item__journal">PMID: 39485298, 2024</p>
+          <a href="https://www.ncbi.nlm.nih.gov/pubmed/39485298/" target="_blank" class="pub-item__link">Read Paper <i class="fas fa-arrow-right"></i></a>
+        </div>
 
-      <p>
-        <strong>Golden CS, Williams S, Serrano MA.</strong><br />
-        Molecular insights of KMT2D and clinical aspects of Kabuki syndrome type 1. Birth Defects Res. 2023 Nov 15;115(19):1809-1824. Review. PubMed PMID: 37158694.<br />
-        <a href="https://pubmed.ncbi.nlm.nih.gov/37158694/" target="_blank">Link</a>
-      </p>
+        <!-- Golden et al. 2024 bioRxiv -->
+        <div class="pub-item fade-up">
+          <span class="pub-item__year">2024</span>
+          <p class="pub-item__title">Nuclear Histone 3 Post-translational Modification Profiling in Whole Cells using Spectral Flow Cytometry</p>
+          <p class="pub-item__authors">Golden CS, Williams S, Blankevoort S, Belkina A, Yost HJ, Serrano MA</p>
+          <p class="pub-item__journal">bioRxiv, 2024</p>
+          <a href="https://www.biorxiv.org/content/10.1101/2024.10.03.616268v1" target="_blank" class="pub-item__link">Read Preprint <i class="fas fa-arrow-right"></i></a>
+        </div>
 
-      <p>
-        <strong>Serrano MA, Demarest BL, Tone-Pah-Hote T, Tristani-Firouzi M, Yost HJ.</strong><br />
-        Inhibition of Notch signaling rescues cardiovascular development in Kabuki Syndrome. PLoS Biol. 2019 Sep;17(9):e3000087. PubMed PMID: 31479440.<br />
-        <a href="https://pubmed.ncbi.nlm.nih.gov/31479440/" target="_blank">Link</a>
-      </p>
+        <!-- Golden et al. 2024 Zenodo -->
+        <div class="pub-item fade-up">
+          <span class="pub-item__year">2024</span>
+          <p class="pub-item__title">Histone 3 Post-translational Modification Profiling using Spectral Flow Cytometry: Analysis Workflow</p>
+          <p class="pub-item__authors">Golden CS, Williams S, Blankevoort S, Belkina A, Yost H, Serrano MA</p>
+          <p class="pub-item__journal">Zenodo, 2024</p>
+          <a href="https://zenodo.org/records/13863623" target="_blank" class="pub-item__link">View Protocol <i class="fas fa-arrow-right"></i></a>
+        </div>
+
+        <!-- Golden 2023 -->
+        <div class="pub-item fade-up">
+          <span class="pub-item__year">2023</span>
+          <p class="pub-item__title">Molecular insights of KMT2D and clinical aspects of Kabuki syndrome type 1</p>
+          <p class="pub-item__authors">Golden CS, Williams S, Serrano MA</p>
+          <p class="pub-item__journal">Birth Defects Research, 2023</p>
+          <a href="https://pubmed.ncbi.nlm.nih.gov/37158694/" target="_blank" class="pub-item__link">Read Paper <i class="fas fa-arrow-right"></i></a>
+        </div>
+
+        <!-- Serrano 2019 -->
+        <div class="pub-item fade-up">
+          <span class="pub-item__year">2019</span>
+          <p class="pub-item__title">Inhibition of Notch signaling rescues cardiovascular development in Kabuki Syndrome</p>
+          <p class="pub-item__authors">Serrano MA, Demarest BL, Tone-Pah-Hote T, Tristani-Firouzi M, Yost HJ</p>
+          <p class="pub-item__journal">PLOS Biology, 2019</p>
+          <a href="https://pubmed.ncbi.nlm.nih.gov/31479440/" target="_blank" class="pub-item__link">Read Paper <i class="fas fa-arrow-right"></i></a>
+        </div>
+
+        <!-- Karanth 2018 -->
+        <div class="pub-item fade-up">
+          <span class="pub-item__year">2018</span>
+          <p class="pub-item__title">A Hepatocyte FOXN3&ndash;&alpha; Cell Glucagon Axis Regulates Fasting Glucose</p>
+          <p class="pub-item__authors">Karanth S, Adams JD, Serrano MLA, Quittner-Strom EB, Simcox J, Villanueva CJ, Ozcan L, Holland WL, Yost HJ, Vella A, Schlegel A</p>
+          <p class="pub-item__journal">Cell Reports, 2018</p>
+          <a href="https://pubmed.ncbi.nlm.nih.gov/29996094/" target="_blank" class="pub-item__link">Read Paper <i class="fas fa-arrow-right"></i></a>
+        </div>
+      </div>
     </div>
   </section>
 
-  <!-- ==================== CREM FEATURE SECTION ==================== -->
+  <!-- ========== FUNDING ========== -->
+  <section class="funding" id="funding">
+    <div class="container" style="text-align:center;">
+      <span class="section-label">Support</span>
+      <h2 class="section-title">Funding &amp; Awards</h2>
+      <div class="funding__grid">
+        <div class="funding-card fade-up">
+          <div class="funding-card__icon"><i class="fas fa-award"></i></div>
+          <div class="funding-card__text">
+            <h4>KAT6 Foundation Award</h4>
+            <p>2026 &ndash; 2027</p>
+          </div>
+        </div>
+        <div class="funding-card fade-up">
+          <div class="funding-card__icon"><i class="fas fa-award"></i></div>
+          <div class="funding-card__text">
+            <h4>Charles H. Hood Foundation Child Health Research Award</h4>
+            <p>2025 &ndash; 2026</p>
+          </div>
+        </div>
+        <div class="funding-card fade-up">
+          <div class="funding-card__icon"><i class="fas fa-award"></i></div>
+          <div class="funding-card__text">
+            <h4>BU Institutional Funding Support</h4>
+            <p>2025</p>
+          </div>
+        </div>
+        <div class="funding-card fade-up">
+          <div class="funding-card__icon"><i class="fas fa-award"></i></div>
+          <div class="funding-card__text">
+            <h4>Warren-Alpert Distinguished Scholar</h4>
+            <p>2020 &ndash; 2023</p>
+          </div>
+        </div>
+        <div class="funding-card fade-up">
+          <div class="funding-card__icon"><i class="fas fa-award"></i></div>
+          <div class="funding-card__text">
+            <h4>American Heart Association Postdoctoral Fellowship</h4>
+            <p>2018 &ndash; 2020</p>
+          </div>
+        </div>
+        <div class="funding-card fade-up">
+          <div class="funding-card__icon"><i class="fas fa-award"></i></div>
+          <div class="funding-card__text">
+            <h4>AAA Postdoctoral Fellowship</h4>
+            <p>2017 &ndash; 2018</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== CReM ========== -->
   <section class="crem" id="crem">
-    <div class="container crem__content">
-      <h2>The Center for Regenerative Medicine (CReM)</h2>
+    <div class="container">
+      <span class="section-label">Our Home</span>
+      <h2 class="section-title">The Center for Regenerative Medicine</h2>
       <p>
-        Learn more about the Center for Regenerative Medicine (CReM) and our
-        collective efforts to fulfill our shared mission: <em>Advancing science
-          to heal the world.</em>
+        Learn more about CReM and our collective efforts to fulfill our shared mission: <em>Advancing science to heal the world.</em>
       </p>
-      <a href="https://crem.bu.edu/about-us/#:~:text=The%20Center%20for%20Regenerative%20Medicine%20(CReM)%20at%20Boston%20University's%20Medical,Boston%20University%20School%20of%20Medicine." class="btn btn--primary" target="_blank">
-        Learn More
+      <a href="https://crem.bu.edu/about-us/" class="btn" style="background:var(--white);color:var(--blue);" target="_blank">
+        Learn More <i class="fas fa-arrow-right"></i>
       </a>
     </div>
   </section>
 
-  <!-- ==================== PATIENT-PARTNERED APPROACH ==================== -->
-  <section class="patient-approach" id="patient-approach">
-    <div class="container patient-approach__content">
-      <h2>Our Patient-Partnered Approach</h2>
-      <p>
-        In collaboration with the Center for Regenerative Medicine (CReM) and the KAT6 Foundation,
-        we’ve established the
-        <a href="https://serranolab.github.io/iKAT6_BANK/" target="_blank"><strong>KAT6 patient iPSC Bank</strong></a>.
-      </p>
-      <p>Check out more information about our patient-partnered approach:</p>
-      <ul>
-        <li><a href="https://youtu.be/5YAjCOvKx1c?feature=shared" target="_blank">A tour in the Serrano Lab at the CReM!</a></li>
-        <li><a href="https://youtu.be/eQAgOKZDAUE?t=811" target="_blank">Our Lab is featured in the film Genetic Defekt, by Niko Mylonas and the KAT6 Foundation</a></li>
-        <li><a href="https://youtu.be/Aztki7jVLn4?feature=shared" target="_blank">Supporting patient-focused research through a KAT6A and KAT6B iPSC Bank. Talk By Saylor Williams</a></li>
-      </ul>
-
-      <!-- Responsive Embedded YouTube Video. We'll load it muted, allow JS control. -->
-      <div class="video-container">
-        <iframe id="myVideo" src="https://www.youtube.com/embed/5YAjCOvKx1c?enablejsapi=1&mute=1" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-      </div>
-    </div>
-  </section>
-
-  <!-- ==================== LAB ACCOMPLISHMENTS ==================== -->
-  <section class="accomplishments">
+  <!-- ========== PATIENT PARTNERSHIP ========== -->
+  <section class="patient" id="patient">
     <div class="container">
-      <h2>Lab Accomplishments</h2>
+      <span class="section-label">Working Together</span>
+      <h2 class="section-title">Our Patient-Partnered Approach</h2>
 
-      <div class="accomplishments__item">
-        <h3><i class="fas fa-award"></i> Carly Golden:</h3>
-        <ul>
-          <li>
-            Co-developed EpiFlow, a high-throughput spectral flow cytometry platform,
-            to characterize histone modification dynamics at single-cell resolution.
-          </li>
-          <li>
-            Characterized chromatin and gene expression changes in KMT2D-deficient neural
-            progenitors by integrating single-cell multiome data.
-          </li>
-        </ul>
-      </div>
-
-      <div class="accomplishments__item">
-        <h3><i class="fas fa-award"></i> Sandeep Sreerama:</h3>
-        <ul>
-          <li>
-            Adapted EpiFlow for concurrent measurement of histone PTMs and protein
-            expression at single-cell resolution in zebrafish tissues.
-          </li>
-          <li>
-            Identified ontogeny-specific histone PTM signatures in KMT2D-deficient pericytes.
-          </li>
-        </ul>
-      </div>
-
-      <div class="accomplishments__item">
-        <h3><i class="fas fa-award"></i> Sandra Sulser Ponce De Leon:</h3>
-        <ul>
-          <li>
-            Invited speaker at the 2024 Reinhart Frank Symposium (University of Tübingen,
-            Germany), presenting research on KMT2D’s role in developmental sprouting angiogenesis.
-          </li>
-          <li>
-            Optimized differentiation protocols for KMT2D-null iPSC-derived arterial-like
-            endothelial cells.
-          </li>
-        </ul>
+      <div class="patient__content">
+        <div class="patient__text fade-up">
+          <p>
+            In collaboration with CReM and the <a href="https://www.kat6foundation.org/" target="_blank">KAT6 Foundation</a>, we've established the
+            <a href="https://serranolab.github.io/iKAT6_BANK/" target="_blank">KAT6 Patient iPSC Biobank</a>&mdash;the first centralized iPSC resource for KAT6-related disorders and a model for patient-partnered rare disease research.
+          </p>
+          <p>
+            Our transparent tracking dashboard allows patients and researchers to monitor biobank status, reinforcing the partnership model. We actively prioritize demographic diversity in sample collection.
+          </p>
+          <ul class="patient__links">
+            <li><a href="https://youtu.be/5YAjCOvKx1c?feature=shared" target="_blank"><i class="fas fa-play-circle"></i> A tour of the Serrano Lab at CReM</a></li>
+            <li><a href="https://youtu.be/eQAgOKZDAUE?t=811" target="_blank"><i class="fas fa-film"></i> Featured in the film Genetic Defekt</a></li>
+            <li><a href="https://youtu.be/Aztki7jVLn4?feature=shared" target="_blank"><i class="fas fa-microphone"></i> KAT6A/B iPSC Bank talk by Saylor Williams</a></li>
+          </ul>
+        </div>
+        <div class="fade-up">
+          <div class="video-wrapper fade-up" id="videoWrapper">
+            <img src="https://img.youtube.com/vi/5YAjCOvKx1c/hqdefault.jpg" alt="Serrano Lab Tour Video" class="video-thumb" />
+            <button class="video-play" aria-label="Play video" onclick="loadVideo()">
+              <i class="fas fa-play"></i>
+            </button>
+          </div>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- ==================== MORE RESOURCES ==================== -->
-  <section class="resources">
+  <!-- ========== ACCOMPLISHMENTS ========== -->
+  <section class="accomplishments" id="accomplishments">
     <div class="container">
-      <h2>More Resources</h2>
-      <p>
-        We love zebrafish! Check out our <a href="https://serranolab.github.io/GAME_webpage/" target="_blank">Zebrafish Game</a>! <span>😊</span>
-      </p>
-      <p>
-        More resources available on our <a href="https://github.com/SerranoLab" target="_blank">Lab GitHub</a>.
-      </p>
+      <span class="section-label">Highlights</span>
+      <h2 class="section-title" style="text-align:center;">Lab Accomplishments</h2>
+      <div class="accomplishments__grid">
+        <div class="acc-card fade-up">
+          <h3><i class="fas fa-star"></i> Carly Golden</h3>
+          <ul>
+            <li>Co-developed EpiFlow, a high-throughput spectral flow cytometry platform for histone modification dynamics at single-cell resolution.</li>
+            <li>First-authored study demonstrating KMT2D-deficiency destabilizes lineage progression in neural progenitors (Epigenetics Reports, 2025).</li>
+            <li>Characterized chromatin and gene expression changes in KMT2D-deficient neural progenitors using single-cell multiome data.</li>
+          </ul>
+        </div>
+        <div class="acc-card fade-up">
+          <h3><i class="fas fa-star"></i> Sandeep Sreerama</h3>
+          <ul>
+            <li>Adapted EpiFlow for concurrent measurement of histone PTMs and protein expression at single-cell resolution in zebrafish tissues.</li>
+            <li>Identified ontogeny-specific histone PTM signatures in KMT2D-deficient pericytes.</li>
+          </ul>
+        </div>
+        <div class="acc-card fade-up">
+          <h3><i class="fas fa-star"></i> Sandra Sulser Ponce De Leon</h3>
+          <ul>
+            <li>Invited speaker at the 2024 Reinhart Frank Symposium (University of Tübingen), presenting on KMT2D's role in developmental sprouting angiogenesis.</li>
+            <li>Optimized differentiation protocols for KMT2D-null iPSC-derived arterial-like endothelial cells.</li>
+          </ul>
+        </div>
+      </div>
     </div>
   </section>
 
-  <!-- ==================== DONATION SECTION ==================== -->
-  <section class="donate" id="donate">
-    <div class="container">
-      <h2>You Can Make a Difference!</h2>
-      <p>
-        To support our lab financially, please consider a donation through
-        <a href="https://trusted.bu.edu/s/1759/22/form.aspx?sid=1759&gid=2&pgid=422&cid=1060&dids=113&appealcode=WEBMED-DV" target="_blank">this link</a>. Kindly add
-        "<strong>Serrano Lab/CReM</strong>" in the note field.
-      </p>
-    </div>
-  </section>
-
-  <!-- ==================== DEI SECTION ==================== -->
+  <!-- ========== DEI ========== -->
   <section class="dei" id="dei">
     <div class="container">
-      <h2>Diversity, Equity, Inclusion, and Accessibility</h2>
-      <div class="dei__content">
-        <h3>Angie's Statement:</h3>
+      <span class="section-label">Our Commitment</span>
+      <h2 class="section-title" style="text-align:center;">Diversity, Equity, Inclusion &amp; Accessibility</h2>
+      <div class="dei__text fade-up">
         <p>
           In our lab, we nurture a culture that values diversity, collaboration, and scientific rigor.
           I have mentored students from underrepresented communities in science, offering sustained
@@ -998,7 +1296,7 @@
         </p>
         <p>
           Improving ethnic and racial representation in academia requires encouraging future scientists
-          from an early age. I actively participate in programs and panel discussions to inspire K-12 students,
+          from an early age. I actively participate in programs and panel discussions to inspire K&ndash;12 students,
           teaching them that curiosity is the primary skill for science and sharing resources for their STEM journey.
         </p>
         <p>
@@ -1010,98 +1308,120 @@
     </div>
   </section>
 
-  <!-- ==================== CONTACT SECTION ==================== -->
+  <!-- ========== DONATE ========== -->
+  <section class="donate" id="donate">
+    <h2>You Can Make a Difference</h2>
+    <p>
+      Support our research through a tax-deductible donation. Please add <strong>"Serrano Lab/CReM"</strong> in the note field.
+    </p>
+    <a href="https://trusted.bu.edu/s/1759/22/form.aspx?sid=1759&gid=2&pgid=422&cid=1060&dids=113&appealcode=WEBMED-DV" class="btn" target="_blank">
+      Donate Now <i class="fas fa-heart"></i>
+    </a>
+  </section>
+
+  <!-- ========== RESOURCES ========== -->
+  <section style="background:var(--white);text-align:center;padding:3rem 1.5rem;">
+    <p style="font-size:1rem;color:var(--gray-600);">
+      We love zebrafish! Try our <a href="https://serranolab.github.io/GAME_webpage/" target="_blank" style="color:var(--blue);font-weight:600;">Zebrafish Game</a>
+      &nbsp;&middot;&nbsp;
+      More resources on our <a href="https://github.com/SerranoLab" target="_blank" style="color:var(--blue);font-weight:600;">Lab GitHub</a>
+    </p>
+  </section>
+
+  <!-- ========== CONTACT ========== -->
   <section class="contact" id="contact">
     <div class="container">
-      <h2>Contact Us</h2>
-      <p>We would love to hear from you! Please fill out the form below.</p>
-      <form action="https://formspree.io/f/xzzrbelz" method="POST" class="contact__form">
-        <div class="contact__form-group">
-          <label for="name">Your Name:</label>
-          <input type="text" id="name" name="name" required />
-        </div>
+      <span class="section-label">Get in Touch</span>
+      <h2 class="section-title" style="text-align:center;">Contact Us</h2>
 
-        <div class="contact__form-group">
-          <label for="email">Your Email:</label>
-          <input type="email" id="email" name="email" required />
+      <div class="contact__inner">
+        <div class="contact__info fade-up">
+          <p>We'd love to hear from you&mdash;whether you're a researcher, patient family, prospective trainee, or collaborator.</p>
+          <p>
+            <strong>Dr. Maria A. Serrano</strong><br />
+            Center for Regenerative Medicine<br />
+            Chobanian &amp; Avedisian School of Medicine<br />
+            Boston University<br />
+            Boston, MA
+          </p>
+          <p>
+            <a href="https://orcid.org/0000-0002-4318-3746" target="_blank"><i class="fab fa-orcid"></i> ORCID</a>
+            &nbsp;&middot;&nbsp;
+            <a href="https://github.com/SerranoLab" target="_blank"><i class="fab fa-github"></i> GitHub</a>
+          </p>
         </div>
-
-        <div class="contact__form-group">
-          <label for="message">Message:</label>
-          <textarea id="message" name="message" rows="6" required></textarea>
-        </div>
-
-        <button type="submit" class="btn btn--primary">Submit</button>
-      </form>
+        <form action="https://formspree.io/f/xzzrbelz" method="POST" class="contact__form fade-up">
+          <div class="form-group">
+            <label for="name">Your Name</label>
+            <input type="text" id="name" name="name" required />
+          </div>
+          <div class="form-group">
+            <label for="email">Your Email</label>
+            <input type="email" id="email" name="email" required />
+          </div>
+          <div class="form-group">
+            <label for="message">Message</label>
+            <textarea id="message" name="message" rows="5" required></textarea>
+          </div>
+          <button type="submit" class="btn btn--blue" style="width:100%;justify-content:center;">Send Message</button>
+        </form>
+      </div>
     </div>
   </section>
 
-  <!-- ==================== FOOTER ==================== -->
+  <!-- ========== BACK TO TOP ========== -->
+  <button class="back-to-top" id="backToTop" aria-label="Back to top" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+    <i class="fas fa-arrow-up"></i>
+  </button>
+
+  <!-- ========== FOOTER ========== -->
   <footer>
-    <p class="footer__text">
-      &copy; <span id="year"></span> The Serrano Lab. All Rights Reserved.
-    </p>
+    <p>&copy; <span id="year"></span> The Serrano Lab &middot; Boston University &middot; All Rights Reserved</p>
   </footer>
 
-  <!-- ==================== JAVASCRIPT FOR PARALLAX & YOUTUBE AUTOPLAY ==================== -->
+  <!-- ========== SCRIPTS ========== -->
   <script>
-    // Insert current year into the footer
-    const yearSpan = document.getElementById('year');
-    if (yearSpan) {
-      yearSpan.textContent = new Date().getFullYear();
-    }
-    // Parallax effect for Hero
-    const heroSection = document.querySelector('.hero');
-    window.addEventListener('scroll', () => {
-      let offset = window.pageYOffset;
-      heroSection.style.backgroundPositionY = offset * 0.5 + 'px';
+    // Year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Hamburger menu
+    const hamburger = document.getElementById('hamburger');
+    const navLinks = document.getElementById('navLinks');
+    hamburger.addEventListener('click', () => {
+      hamburger.classList.toggle('active');
+      navLinks.classList.toggle('open');
     });
-    // Parallax effect for the research banner
-    // If you want it to move at a different speed, do similarly:
-    const researchBanner = document.querySelector('.parallax-research');
-    window.addEventListener('scroll', () => {
-      if (!researchBanner) return;
-      let offset2 = window.pageYOffset;
-      researchBanner.style.backgroundPositionY = offset2 * 0.3 + 'px';
+    // Close menu on link click
+    navLinks.querySelectorAll('.nav__link').forEach(link => {
+      link.addEventListener('click', () => {
+        hamburger.classList.remove('active');
+        navLinks.classList.remove('open');
+      });
     });
-    // ==================== YOUTUBE AUTOPLAY ON SCROLL ====================
-    // For this to work properly, we must:
-    // 1. Include '?enablejsapi=1&mute=1' in the iframe src
-    // 2. Insert the YouTube IFrame API script
-    // 3. Wait for scroll intersection, then call player.playVideo().
-    let player;
-    // This function gets called when the IFrame API is ready
-    function onYouTubeIframeAPIReady() {
-      player = new YT.Player('myVideo', {
-        events: {
-          'onReady': onPlayerReady
+
+    // Header shadow + back-to-top on scroll
+    const header = document.getElementById('header');
+    const backToTop = document.getElementById('backToTop');
+    window.addEventListener('scroll', () => {
+      header.classList.toggle('scrolled', window.scrollY > 20);
+      backToTop.classList.toggle('show', window.scrollY > 600);
+    });
+
+    // Scroll reveal
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
         }
       });
-    }
+    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+    document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
 
-    function onPlayerReady(event) {
-      // Setup IntersectionObserver to watch the video element
-      const videoIframe = document.getElementById('myVideo');
-      if (!videoIframe) return;
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          // If the video is visible, play it
-          if (entry.isIntersecting) {
-            event.target.playVideo();
-          } else {
-            event.target.pauseVideo();
-          }
-        });
-      }, {
-        threshold: 0.5
-      });
-      observer.observe(videoIframe);
+    // Click-to-play video
+    function loadVideo() {
+      const wrapper = document.getElementById('videoWrapper');
+      wrapper.innerHTML = '<iframe src="https://www.youtube.com/embed/5YAjCOvKx1c?autoplay=1&rel=0" title="Serrano Lab Tour" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>';
     }
-    // Dynamically load the YouTube IFrame API
-    let tag = document.createElement('script');
-    tag.src = "https://www.youtube.com/iframe_api";
-    document.head.appendChild(tag);
   </script>
 </body>
-
 </html>

@@ -140,6 +140,20 @@
       letter-spacing: 0.02em;
     }
     .nav__link:hover { color: var(--blue); background: var(--gray-100); }
+    .nav__donate {
+      background: linear-gradient(135deg, var(--coral), var(--coral-light));
+      color: var(--white) !important;
+      border-radius: 100px;
+      padding: 0.45rem 1rem;
+      font-size: 0.82rem;
+      transition: all 0.25s;
+    }
+    .nav__donate:hover {
+      background: var(--coral);
+      color: var(--white) !important;
+      filter: brightness(1.1);
+      transform: translateY(-1px);
+    }
 
     /* Hamburger */
     .hamburger { display: none; background: none; border: none; cursor: pointer; padding: 0.5rem; }
@@ -619,38 +633,56 @@
       border: 0;
     }
 
-    /* ============ ACCOMPLISHMENTS ============ */
-    .accomplishments { background: var(--gray-50); }
-    .accomplishments__grid {
+    /* ============ LAB NEWS & HIGHLIGHTS ============ */
+    .highlights { background: var(--white); }
+    .highlights__news {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
       gap: 1.5rem;
       margin-top: 2rem;
     }
-    .acc-card {
-      background: var(--white);
+    .hl-card {
+      background: var(--gray-50);
       border: 1px solid var(--gray-200);
       border-radius: 10px;
-      padding: 1.8rem;
+      padding: 1.6rem;
+      transition: all 0.25s;
     }
-    .acc-card h3 {
-      font-size: 1.1rem;
-      color: var(--navy);
-      margin-bottom: 0.8rem;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
+    .hl-card:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(0,0,0,0.06); }
+    .hl-card__icon { font-size: 1.5rem; margin-bottom: 0.6rem; }
+    .hl-card__date {
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--coral);
+      margin-bottom: 0.5rem;
     }
-    .acc-card h3 i { color: var(--coral); font-size: 0.9rem; }
-    .acc-card li {
-      font-size: 0.9rem;
+    .hl-card__badge {
+      display: inline-block;
+      background: linear-gradient(135deg, var(--coral), var(--coral-light));
+      color: var(--white);
+      font-size: 0.6rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      padding: 0.12rem 0.45rem;
+      border-radius: 3px;
+      margin-left: 0.4rem;
+      vertical-align: middle;
+    }
+    .hl-card h3 { font-size: 1.1rem; color: var(--navy); margin-bottom: 0.5rem; }
+    .hl-card p { font-size: 0.9rem; color: var(--gray-600); line-height: 1.6; }
+    .hl-card ul { margin-top: 0.5rem; }
+    .hl-card li {
+      font-size: 0.88rem;
       color: var(--gray-600);
       line-height: 1.6;
-      margin-bottom: 0.5rem;
+      margin-bottom: 0.4rem;
       padding-left: 1rem;
       position: relative;
     }
-    .acc-card li::before {
+    .hl-card li::before {
       content: '';
       position: absolute;
       left: 0;
@@ -660,6 +692,69 @@
       border-radius: 50%;
       background: var(--blue);
     }
+
+    /* ============ PHOTO GALLERY ============ */
+    .gallery { background: var(--gray-50); overflow: hidden; }
+    .gallery__track {
+      display: flex;
+      gap: 1rem;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      padding: 0.5rem 0 1rem;
+      scrollbar-width: thin;
+      scrollbar-color: var(--gray-200) transparent;
+    }
+    .gallery__track::-webkit-scrollbar { height: 6px; }
+    .gallery__track::-webkit-scrollbar-track { background: transparent; }
+    .gallery__track::-webkit-scrollbar-thumb { background: var(--gray-200); border-radius: 3px; }
+    .gallery__item {
+      flex: 0 0 auto;
+      width: 320px;
+      height: 240px;
+      border-radius: 10px;
+      overflow: hidden;
+      scroll-snap-align: start;
+      position: relative;
+    }
+    .gallery__item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.4s ease;
+    }
+    .gallery__item:hover img { transform: scale(1.05); }
+    .gallery__caption {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 0.6rem 0.9rem;
+      background: linear-gradient(transparent, rgba(0,0,0,0.65));
+      color: var(--white);
+      font-size: 0.8rem;
+      font-weight: 500;
+    }
+    .gallery__controls {
+      display: flex;
+      justify-content: center;
+      gap: 0.8rem;
+      margin-top: 1rem;
+    }
+    .gallery__btn {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      border: 1px solid var(--gray-200);
+      background: var(--white);
+      color: var(--gray-600);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s;
+    }
+    .gallery__btn:hover { border-color: var(--blue); color: var(--blue); }
 
     /* ============ DEI ============ */
     .dei { background: var(--white); }
@@ -840,6 +935,7 @@
       </button>
       <ul class="nav__links" id="navLinks">
         <li><a href="#home" class="nav__link">Home</a></li>
+        <li><a href="#news" class="nav__link">News</a></li>
         <li><a href="#research" class="nav__link">Research</a></li>
         <li><a href="#tools" class="nav__link">Software</a></li>
         <li><a href="#team" class="nav__link">Team</a></li>
@@ -847,6 +943,7 @@
         <li><a href="#patient" class="nav__link">Partnership</a></li>
         <li><a href="#dei" class="nav__link">DEI</a></li>
         <li><a href="#contact" class="nav__link">Contact</a></li>
+        <li><a href="#donate" class="nav__link nav__donate"><i class="fas fa-heart"></i> Donate</a></li>
       </ul>
     </nav>
   </header>
@@ -916,6 +1013,74 @@
     </div>
   </section>
 
+  <!-- ========== LAB NEWS & HIGHLIGHTS ========== -->
+  <section class="highlights" id="news">
+    <div class="container">
+      <span class="section-label">What's New</span>
+      <h2 class="section-title" style="text-align:center;">Lab News &amp; Highlights</h2>
+      <div class="highlights__news">
+
+        <!-- Carly defense -->
+        <div class="hl-card fade-up">
+          <div class="hl-card__icon">🎓</div>
+          <p class="hl-card__date">2025 <span class="hl-card__badge">New</span></p>
+          <h3>Congratulations Dr. Golden!</h3>
+          <p>Carly is the first graduate student to defend her thesis from the Serrano Lab! <em>Lysine Methyltransferase 2D (KMT2D) Loss Disrupts Lineage Progression During Human Neurodevelopment.</em></p>
+        </div>
+
+        <!-- New pub -->
+        <div class="hl-card fade-up">
+          <div class="hl-card__icon">📄</div>
+          <p class="hl-card__date">2025</p>
+          <h3>New Publication</h3>
+          <p>Golden et al. published in <em>Epigenetics Reports</em> &mdash; KMT2D-deficiency destabilizes lineage progression in immature neural progenitors.</p>
+        </div>
+
+        <!-- Hood award -->
+        <div class="hl-card fade-up">
+          <div class="hl-card__icon">🏆</div>
+          <p class="hl-card__date">2025 &ndash; 2026</p>
+          <h3>Hood Foundation Award</h3>
+          <p>The lab received the Charles H. Hood Foundation Child Health Research Award to support our work on rare epigenetic disorders.</p>
+        </div>
+
+        <!-- Carly highlights -->
+        <div class="hl-card fade-up">
+          <div class="hl-card__icon">⭐</div>
+          <p class="hl-card__date">Trainee Highlights</p>
+          <h3>Carly Golden</h3>
+          <ul>
+            <li>Co-developed EpiFlow, a high-throughput spectral flow cytometry platform for histone modification dynamics at single-cell resolution.</li>
+            <li>First-authored study on KMT2D-deficiency in neural progenitors (Epigenetics Reports, 2025).</li>
+          </ul>
+        </div>
+
+        <!-- Sandeep highlights -->
+        <div class="hl-card fade-up">
+          <div class="hl-card__icon">⭐</div>
+          <p class="hl-card__date">Trainee Highlights</p>
+          <h3>Sandeep Sreerama</h3>
+          <ul>
+            <li>Adapted EpiFlow for concurrent measurement of histone PTMs and protein expression at single-cell resolution in zebrafish tissues.</li>
+            <li>Identified ontogeny-specific histone PTM signatures in KMT2D-deficient pericytes.</li>
+          </ul>
+        </div>
+
+        <!-- Sandra highlights -->
+        <div class="hl-card fade-up">
+          <div class="hl-card__icon">⭐</div>
+          <p class="hl-card__date">Trainee Highlights</p>
+          <h3>Sandra Sulser Ponce De Leon</h3>
+          <ul>
+            <li>Invited speaker at the 2024 Reinhart Frank Symposium (University of Tübingen) on KMT2D's role in developmental sprouting angiogenesis.</li>
+            <li>Optimized differentiation protocols for KMT2D-null iPSC-derived arterial-like endothelial cells.</li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
   <!-- ========== RESEARCH ========== -->
   <section class="research" id="research">
     <div class="container">
@@ -975,7 +1140,7 @@
           <div class="tool-card__icon"><i class="fas fa-chart-bar"></i></div>
           <h3>EpiFlow Analysis Platform</h3>
           <p>R Shiny application for analyzing spectral flow cytometry data with focus on histone post-translational modification profiling, statistical modeling, and visualization.</p>
-          <a href="https://serranolab.shinyapps.io/EpiFlow_Analysis/" target="_blank">Launch App <i class="fas fa-arrow-right"></i></a>
+          <a href="https://epiflow.serranolab.org/" target="_blank">Launch App <i class="fas fa-arrow-right"></i></a>
         </div>
         <div class="tool-card fade-up">
           <div class="tool-card__icon"><i class="fas fa-palette"></i></div>
@@ -1054,6 +1219,17 @@
               Originally from Mexico City. Registered Dietitian with an M.Sc. in Nutrition and Metabolism. Studies how KMT2D regulates endothelial tip and stalk cell selection during sprouting angiogenesis using iPSC-derived endothelial cells and zebrafish.
             </p>
           </div>
+        </div>
+      </div>
+
+      <!-- Marcelo -->
+      <div class="team-card fade-up">
+        <div class="team-card__body" style="padding-top:2rem;">
+          <h3 class="team-card__name">Marcelo Catalano Chapa</h3>
+          <p class="team-card__role">Undergraduate Researcher</p>
+          <p class="team-card__bio">
+            B.Sc. student, Boston University College of Engineering. Marcelo's project aims to characterize H3-PTM signatures in KMT2D-null and Kabuki syndrome patient iPSC-derived neuronal progenitors.
+          </p>
         </div>
       </div>
 
@@ -1246,34 +1422,96 @@
     </div>
   </section>
 
-  <!-- ========== ACCOMPLISHMENTS ========== -->
-  <section class="accomplishments" id="accomplishments">
+  <!-- ========== PHOTO GALLERY ========== -->
+  <section class="gallery" id="gallery">
     <div class="container">
-      <span class="section-label">Highlights</span>
-      <h2 class="section-title" style="text-align:center;">Lab Accomplishments</h2>
-      <div class="accomplishments__grid">
-        <div class="acc-card fade-up">
-          <h3><i class="fas fa-star"></i> Carly Golden</h3>
-          <ul>
-            <li>Co-developed EpiFlow, a high-throughput spectral flow cytometry platform for histone modification dynamics at single-cell resolution.</li>
-            <li>First-authored study demonstrating KMT2D-deficiency destabilizes lineage progression in neural progenitors (Epigenetics Reports, 2025).</li>
-            <li>Characterized chromatin and gene expression changes in KMT2D-deficient neural progenitors using single-cell multiome data.</li>
-          </ul>
+      <span class="section-label">Life in the Lab</span>
+      <h2 class="section-title" style="text-align:center;">Photo Gallery</h2>
+      <div class="gallery__track" id="galleryTrack">
+        <div class="gallery__item">
+          <img src="https://raw.githubusercontent.com/SerranoLab/online/refs/heads/main/gallery-1.jpg" alt="Researcher at the hood picking neural rosettes while two lab members observe from behind" />
+          <div class="gallery__caption">First batch of cerebral organoids</div>
         </div>
-        <div class="acc-card fade-up">
-          <h3><i class="fas fa-star"></i> Sandeep Sreerama</h3>
-          <ul>
-            <li>Adapted EpiFlow for concurrent measurement of histone PTMs and protein expression at single-cell resolution in zebrafish tissues.</li>
-            <li>Identified ontogeny-specific histone PTM signatures in KMT2D-deficient pericytes.</li>
-          </ul>
+        <div class="gallery__item">
+          <img src="https://raw.githubusercontent.com/SerranoLab/online/refs/heads/main/gallery-2.jpg" alt="Darrel, Greg, and Gustavo smiling and welcoming the Serrano Lab" />
+          <div class="gallery__caption">Darrel, Greg, and Gustavo welcoming the Serrano Lab</div>
         </div>
-        <div class="acc-card fade-up">
-          <h3><i class="fas fa-star"></i> Sandra Sulser Ponce De Leon</h3>
-          <ul>
-            <li>Invited speaker at the 2024 Reinhart Frank Symposium (University of Tübingen), presenting on KMT2D's role in developmental sprouting angiogenesis.</li>
-            <li>Optimized differentiation protocols for KMT2D-null iPSC-derived arterial-like endothelial cells.</li>
-          </ul>
+        <div class="gallery__item">
+          <img src="https://raw.githubusercontent.com/SerranoLab/online/refs/heads/main/gallery-3.jpg" alt="Sandra and Saylor working together at the spectral flow cytometer" />
+          <div class="gallery__caption">Spectral flow afternoon with Sandra and Saylor</div>
         </div>
+        <div class="gallery__item">
+          <img src="https://raw.githubusercontent.com/SerranoLab/online/refs/heads/main/gallery-4.jpg" alt="Sandra and Sandeep setting up zebrafish tanks in the facility" />
+          <div class="gallery__caption">Sandra and Sandeep setting up zebrafish tanks</div>
+        </div>
+        <div class="gallery__item">
+          <img src="https://raw.githubusercontent.com/SerranoLab/online/refs/heads/main/gallery-5.jpg" alt="Lab members gathered around a table enjoying pizza together" />
+          <div class="gallery__caption">Pizza night!</div>
+        </div>
+        <div class="gallery__item">
+          <img src="https://raw.githubusercontent.com/SerranoLab/online/refs/heads/main/gallery-6.jpg" alt="Custom lab mug on a desk, a gift from Zoe" />
+          <div class="gallery__caption">Angie's mug &mdash; thank you, Zoe!</div>
+        </div>
+        <div class="gallery__item">
+          <img src="https://raw.githubusercontent.com/SerranoLab/online/refs/heads/main/gallery-7.jpg" alt="Zoe presenting a research poster at Evans Day" />
+          <div class="gallery__caption">Zoe presenting at Evans Day</div>
+        </div>
+        <div class="gallery__item">
+          <img src="https://raw.githubusercontent.com/SerranoLab/online/refs/heads/main/gallery-8.jpg" alt="Sandeep at the podium representing the lab at the International KAT6 Conference" />
+          <div class="gallery__caption">Sandeep at the International KAT6 Conference</div>
+        </div>
+        <div class="gallery__item">
+          <img src="https://raw.githubusercontent.com/SerranoLab/online/refs/heads/main/gallery-9.jpg" alt="BU RISE students Sandeep, Vivian, Sandra, and Terry standing together after presenting their research posters" />
+          <div class="gallery__caption">BU RISE students after poster presentations: Sandeep, Vivian, Sandra, and Terry</div>
+        </div>
+        <div class="gallery__item">
+          <img src="https://raw.githubusercontent.com/SerranoLab/online/refs/heads/main/gallery-10.jpg" alt="New fluorescent microscope in the lab, freshly installed" />
+          <div class="gallery__caption">Our fluorescent scope arrived! The lab is coming together</div>
+        </div>
+        <div class="gallery__item">
+          <img src="https://raw.githubusercontent.com/SerranoLab/online/refs/heads/main/gallery-11.jpg" alt="Irena and Sophia posing together in the lab" />
+          <div class="gallery__caption">Irena and Sophia &mdash; what a team!</div>
+        </div>
+        <div class="gallery__item">
+          <img src="https://raw.githubusercontent.com/SerranoLab/online/refs/heads/main/gallery-12.jpg" alt="Carly celebrating after successfully defending her PhD thesis" />
+          <div class="gallery__caption">Congratulations Dr. Golden!</div>
+        </div>
+        <div class="gallery__item">
+          <img src="https://raw.githubusercontent.com/SerranoLab/online/refs/heads/main/gallery-13.jpg" alt="Carly's first confocal microscopy image displayed on a monitor" />
+          <div class="gallery__caption">Carly's first confocal image</div>
+        </div>
+        <div class="gallery__item">
+          <img src="https://raw.githubusercontent.com/SerranoLab/online/refs/heads/main/gallery-14.jpg" alt="Emilia and Sophia smiling and celebrating good experimental results" />
+          <div class="gallery__caption">Emilia and Sophia celebrating good data!</div>
+        </div>
+        <div class="gallery__item">
+          <img src="https://raw.githubusercontent.com/SerranoLab/online/refs/heads/main/gallery-15.jpg" alt="Saylor mentoring Emilia at the bench" />
+          <div class="gallery__caption">Saylor mentoring Emilia</div>
+        </div>
+        <div class="gallery__item">
+          <img src="https://raw.githubusercontent.com/SerranoLab/online/refs/heads/main/gallery-16.jpg" alt="Lab member counting events at the Stratedigm flow cytometer" />
+          <div class="gallery__caption">Counting events at the Stratedigm!</div>
+        </div>
+        <div class="gallery__item">
+          <img src="https://raw.githubusercontent.com/SerranoLab/online/refs/heads/main/gallery-17.jpg" alt="Emilia fin-clipping zebrafish for the first time at the dissecting scope" />
+          <div class="gallery__caption">Emilia fin-clipping zebrafish for the first time</div>
+        </div>
+        <div class="gallery__item">
+          <img src="https://raw.githubusercontent.com/SerranoLab/online/refs/heads/main/gallery-18.jpg" alt="Lab team building a marshmallow tower during a team challenge" />
+          <div class="gallery__caption">Marshmallow challenge!</div>
+        </div>
+        <div class="gallery__item">
+          <img src="https://raw.githubusercontent.com/SerranoLab/online/refs/heads/main/gallery-19.jpg" alt="Sandra presenting a research poster at the Vascular Biology 2025 conference" />
+          <div class="gallery__caption">Sandra at Vascular Biology 2025</div>
+        </div>
+        <div class="gallery__item">
+          <img src="https://raw.githubusercontent.com/SerranoLab/online/refs/heads/main/gallery-20.jpg" alt="Group photo of CReM members gathered together" />
+          <div class="gallery__caption">The CReM is a special place</div>
+        </div>
+      </div>
+      <div class="gallery__controls">
+        <button class="gallery__btn" onclick="scrollGallery(-1)" aria-label="Previous"><i class="fas fa-chevron-left"></i></button>
+        <button class="gallery__btn" onclick="scrollGallery(1)" aria-label="Next"><i class="fas fa-chevron-right"></i></button>
       </div>
     </div>
   </section>
@@ -1313,9 +1551,9 @@
   <section class="donate" id="donate">
     <h2>You Can Make a Difference</h2>
     <p>
-      Support our research through a tax-deductible donation. Please add <strong>"Serrano Lab/CReM"</strong> in the note field.
+      Support our research on rare pediatric epigenetic disorders through a tax-deductible donation.
     </p>
-    <a href="https://trusted.bu.edu/s/1759/22/form.aspx?sid=1759&gid=2&pgid=422&cid=1060&dids=113&appealcode=WEBMED-DV" class="btn" target="_blank">
+    <a href="https://give.bu.edu/campaigns/59704/donations/new?designation_id=9300010460" class="btn" target="_blank">
       Donate Now <i class="fas fa-heart"></i>
     </a>
   </section>
@@ -1422,6 +1660,12 @@
     function loadVideo() {
       const wrapper = document.getElementById('videoWrapper');
       wrapper.innerHTML = '<iframe src="https://www.youtube.com/embed/5YAjCOvKx1c?autoplay=1&rel=0" title="Serrano Lab Tour" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>';
+    }
+
+    // Gallery scroll
+    function scrollGallery(direction) {
+      const track = document.getElementById('galleryTrack');
+      track.scrollBy({ left: direction * 340, behavior: 'smooth' });
     }
   </script>
 </body>

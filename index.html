@@ -392,7 +392,7 @@
     .team { background: var(--gray-50); }
     .team__grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      grid-template-columns: repeat(3, 1fr);
       gap: 1.5rem;
       margin-top: 2rem;
     }
@@ -893,6 +893,7 @@
       .dei__text { column-count: 1; }
       .focus-strip__inner { gap: 1.5rem; }
       .focus-strip__divider { display: none; }
+      .team__grid { grid-template-columns: repeat(2, 1fr); }
     }
     @media (max-width: 768px) {
       .hamburger { display: block; }
@@ -911,7 +912,7 @@
       .nav__links.open { display: flex; }
       .nav__link { width: 100%; padding: 0.7rem 0; }
       .hero__title { font-size: 2rem; }
-      .team__grid { grid-template-columns: 1fr; }
+      .team__grid { grid-template-columns: 1fr; max-width: 400px; margin-left: auto; margin-right: auto; }
     }
     @media (max-width: 480px) {
       .focus-strip__inner { flex-direction: column; text-align: center; gap: 1.2rem; padding: 1.5rem; }
@@ -1220,17 +1221,17 @@
             </p>
           </div>
         </div>
-      </div>
 
-      <!-- Marcelo -->
-      <div class="team-card fade-up">
-        <img src="https://raw.githubusercontent.com/SerranoLab/online/refs/heads/main/Marcelo%20Catalano%20Chapa.jpg" alt="Photo of Marcelo Catalano Chapa" class="team-card__img" />
-        <div class="team-card__body">
-          <h3 class="team-card__name">Marcelo Catalano Chapa</h3>
-          <p class="team-card__role">Undergraduate Researcher</p>
-          <p class="team-card__bio">
-            B.Sc. student, Boston University College of Engineering. Marcelo's project aims to characterize H3-PTM signatures in KMT2D-null and Kabuki syndrome patient iPSC-derived neuronal progenitors.
-          </p>
+        <!-- Marcelo -->
+        <div class="team-card fade-up">
+          <img src="https://raw.githubusercontent.com/SerranoLab/online/refs/heads/main/Marcelo%20Catalano%20Chapa.jpg" alt="Photo of Marcelo Catalano Chapa" class="team-card__img" />
+          <div class="team-card__body">
+            <h3 class="team-card__name">Marcelo Catalano Chapa</h3>
+            <p class="team-card__role">Undergraduate Researcher</p>
+            <p class="team-card__bio">
+              B.Sc. student, Boston University College of Engineering. Marcelo's project aims to characterize H3-PTM signatures in KMT2D-null and Kabuki syndrome patient iPSC-derived neuronal progenitors.
+            </p>
+          </div>
         </div>
       </div>
 
@@ -1245,6 +1246,7 @@
           <span class="past-tag">Sophia Blankevoort</span>
           <span class="past-tag">Emilia Serrano</span>
           <span class="past-tag">Jack Nelson, PhD Rotation</span>
+          <span class="past-tag">Madison Bailey, PhD Rotation</span>
         </div>
       </div>
     </div>

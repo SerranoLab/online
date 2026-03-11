@@ -774,6 +774,129 @@
       color: var(--blue);
     }
 
+    /* Mentoring subsection */
+    .mentoring-sub {
+      margin-top: 3rem;
+      padding-top: 2.5rem;
+      border-top: 1px solid var(--gray-200);
+    }
+    .mentoring-sub h3 {
+      font-family: var(--font-display);
+      font-size: 1.6rem;
+      color: var(--navy);
+      text-align: center;
+      margin-bottom: 0.4rem;
+    }
+    .mentoring-sub .sub-desc {
+      text-align: center;
+      color: var(--gray-500);
+      font-size: 0.92rem;
+      margin-bottom: 2rem;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .mentoring-intro {
+      max-width: 750px;
+      margin: 0 auto 2rem;
+      color: var(--gray-600);
+      font-size: 0.95rem;
+      line-height: 1.7;
+      text-align: center;
+    }
+    .mentoring-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      max-width: 850px;
+      margin: 0 auto 2rem;
+    }
+    .mentoring-card {
+      background: var(--gray-50);
+      border: 1px solid var(--gray-200);
+      border-radius: 10px;
+      padding: 1.5rem;
+      transition: all 0.25s;
+    }
+    .mentoring-card:hover {
+      border-color: var(--blue);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+    }
+    .mentoring-card__icon {
+      font-size: 1.4rem;
+      margin-bottom: 0.6rem;
+    }
+    .mentoring-card h4 {
+      font-size: 1rem;
+      color: var(--navy);
+      margin-bottom: 0.4rem;
+    }
+    .mentoring-card p {
+      font-size: 0.85rem;
+      color: var(--gray-500);
+      line-height: 1.6;
+    }
+    .mentoring-card ul {
+      font-size: 0.85rem;
+      color: var(--gray-500);
+      line-height: 1.7;
+      margin: 0.3rem 0 0 1.2rem;
+    }
+    .mentoring-platform-cta {
+      text-align: center;
+      margin: 2rem auto 0;
+      padding: 2rem;
+      background: linear-gradient(135deg, var(--navy), #1e5f8e);
+      border-radius: 12px;
+      max-width: 850px;
+    }
+    .mentoring-platform-cta h4 {
+      color: var(--white);
+      font-family: var(--font-display);
+      font-size: 1.2rem;
+      margin-bottom: 0.5rem;
+    }
+    .mentoring-platform-cta p {
+      color: rgba(255,255,255,0.75);
+      font-size: 0.88rem;
+      margin-bottom: 1.2rem;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .mentoring-platform-cta .btn-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: var(--white);
+      color: var(--navy);
+      font-weight: 700;
+      font-size: 0.92rem;
+      padding: 0.7rem 1.6rem;
+      border-radius: 8px;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+    .mentoring-platform-cta .btn-cta:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+    }
+    .mentoring-platform-cta .btn-gh {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      color: rgba(255,255,255,0.8);
+      font-size: 0.82rem;
+      text-decoration: none;
+      margin-top: 0.8rem;
+      transition: color 0.2s;
+    }
+    .mentoring-platform-cta .btn-gh:hover { color: var(--white); }
+    @media (max-width: 768px) {
+      .mentoring-grid { grid-template-columns: 1fr; }
+    }
+
     /* ============ CONTACT ============ */
     .contact { background: var(--gray-50); }
     .contact__inner {
@@ -942,7 +1065,7 @@
         <li><a href="#team" class="nav__link">Team</a></li>
         <li><a href="#publications" class="nav__link">Publications</a></li>
         <li><a href="#patient" class="nav__link">Partnership</a></li>
-        <li><a href="#dei" class="nav__link">DEI</a></li>
+        <li><a href="#dei" class="nav__link">EDIA &amp; Mentoring</a></li>
         <li><a href="#contact" class="nav__link">Contact</a></li>
         <li><a href="#donate" class="nav__link nav__donate"><i class="fas fa-heart"></i> Donate</a></li>
       </ul>
@@ -1023,7 +1146,7 @@
 
         <!-- Carly defense -->
         <div class="hl-card fade-up">
-          <div class="hl-card__icon">🎓</div>
+          <div class="hl-card__icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--navy)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c0 2 3 3 6 3s6-1 6-3v-5"/></svg></div>
           <p class="hl-card__date">2025 <span class="hl-card__badge">New</span></p>
           <h3>Congratulations Dr. Golden!</h3>
           <p>Carly is the first graduate student to defend her thesis from the Serrano Lab! <em>Lysine Methyltransferase 2D (KMT2D) Loss Disrupts Lineage Progression During Human Neurodevelopment.</em></p>
@@ -1031,7 +1154,7 @@
 
         <!-- New pub -->
         <div class="hl-card fade-up">
-          <div class="hl-card__icon">📄</div>
+          <div class="hl-card__icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--navy)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><line x1="10" y1="9" x2="8" y2="9"/></svg></div>
           <p class="hl-card__date">2025</p>
           <h3>New Publication</h3>
           <p>Golden et al. published in <em>Epigenetics Reports</em> &mdash; KMT2D-deficiency destabilizes lineage progression in immature neural progenitors.</p>
@@ -1039,7 +1162,7 @@
 
         <!-- Hood award -->
         <div class="hl-card fade-up">
-          <div class="hl-card__icon">🏆</div>
+          <div class="hl-card__icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--navy)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/></svg></div>
           <p class="hl-card__date">2025 &ndash; 2026</p>
           <h3>Hood Foundation Award</h3>
           <p>The lab received the Charles H. Hood Foundation Child Health Research Award to support our work on rare epigenetic disorders.</p>
@@ -1047,7 +1170,7 @@
 
         <!-- Carly highlights -->
         <div class="hl-card fade-up">
-          <div class="hl-card__icon">⭐</div>
+          <div class="hl-card__icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--navy)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
           <p class="hl-card__date">Trainee Highlights</p>
           <h3>Carly Golden</h3>
           <ul>
@@ -1058,7 +1181,7 @@
 
         <!-- Sandeep highlights -->
         <div class="hl-card fade-up">
-          <div class="hl-card__icon">⭐</div>
+          <div class="hl-card__icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--navy)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
           <p class="hl-card__date">Trainee Highlights</p>
           <h3>Sandeep Sreerama</h3>
           <ul>
@@ -1069,7 +1192,7 @@
 
         <!-- Sandra highlights -->
         <div class="hl-card fade-up">
-          <div class="hl-card__icon">⭐</div>
+          <div class="hl-card__icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--navy)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
           <p class="hl-card__date">Trainee Highlights</p>
           <h3>Sandra Sulser Ponce De Leon</h3>
           <ul>
@@ -1519,7 +1642,7 @@
     </div>
   </section>
 
-  <!-- ========== DEI ========== -->
+  <!-- ========== EDIA & MENTORING ========== -->
   <section class="dei" id="dei">
     <div class="container">
       <span class="section-label">Our Commitment</span>
@@ -1546,6 +1669,77 @@
           and supporting their growth. I believe in science's higher purpose and in empowering my mentees to
           profoundly impact underserved communities.
         </p>
+      </div>
+
+      <!-- Mentoring subsection -->
+      <div class="mentoring-sub fade-up">
+        <h3>Mentoring Philosophy &amp; Practice</h3>
+        <p class="sub-desc">Structured, growth-centered mentoring that meets each trainee where they are</p>
+
+        <p class="mentoring-intro">
+          We believe mentoring is an active, evolving practice&mdash;not a checklist. Our approach centers on 
+          individualized development plans, regular reflection, and transparent accountability for both mentor 
+          and mentee. To support this, we developed an open-source platform that structures our mentoring 
+          around NIH training plan expectations while keeping the focus on each trainee's unique growth trajectory.
+        </p>
+
+        <div class="mentoring-grid">
+          <div class="mentoring-card">
+            <div class="mentoring-card__icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="var(--navy)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c0 2 3 3 6 3s6-1 6-3v-5"/></svg></div>
+            <h4>For Mentees</h4>
+            <ul>
+              <li>Personalized IDP with SMART goals and milestone scheduling</li>
+              <li>Training competency matrix across 7 domains and 50+ skills</li>
+              <li>Publication pipeline, conference log, and certificate tracking</li>
+              <li>1:1 meeting log with rolling action items for accountability</li>
+              <li>DAC scheduling and networking tracker</li>
+            </ul>
+          </div>
+          <div class="mentoring-card">
+            <div class="mentoring-card__icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="var(--navy)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+            <h4>For Mentors</h4>
+            <ul>
+              <li>Lab-wide training health assessment (not trainee comparison)</li>
+              <li>Individual growth tracking with mentor-defined goals</li>
+              <li>Structured self-reflection prompts and action items</li>
+              <li>Reference paragraph builder for letters and reviews</li>
+              <li>Exportable reports for grants, annual reviews, and biosketches</li>
+            </ul>
+          </div>
+          <div class="mentoring-card">
+            <div class="mentoring-card__icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="var(--navy)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg></div>
+            <h4>Competency Framework</h4>
+            <p>
+              Seven training domains tailored by career stage&mdash;from core lab practices and technical skills 
+              to leadership, scientific communication, and clinical exposure&mdash;ensuring comprehensive 
+              professional development aligned with NIH expectations.
+            </p>
+          </div>
+          <div class="mentoring-card">
+            <div class="mentoring-card__icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="var(--navy)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a7 7 0 0 1 7 7c0 2.38-1.19 4.47-3 5.74V17a1 1 0 0 1-1 1H9a1 1 0 0 1-1-1v-2.26C6.19 13.47 5 11.38 5 9a7 7 0 0 1 7-7z"/><path d="M9 21h6M10 17v4M14 17v4"/></svg></div>
+            <h4>Growth-Centered Design</h4>
+            <p>
+              The mentor portal is deliberately framed around lab investment needs rather than trainee comparison. 
+              A dedicated mentoring reflection section helps PIs assess their own practice, identify shared 
+              barriers, and plan concrete improvements to lab culture.
+            </p>
+          </div>
+        </div>
+
+        <div class="mentoring-platform-cta">
+          <h4>Serrano Lab Mentoring &amp; Training Platform</h4>
+          <p>
+            Open-source, browser-based, no installation required. Runs entirely in the browser with localStorage 
+            persistence. Licensed under CC&nbsp;BY&nbsp;4.0&mdash;free to adapt for your own lab.
+          </p>
+          <a href="https://ma-serr.github.io/mentoring-platform/" class="btn-cta" target="_blank">
+            <i class="fas fa-external-link-alt"></i> Launch Platform
+          </a>
+          <br>
+          <a href="https://github.com/ma-serr/mentoring-platform" class="btn-gh" target="_blank">
+            <i class="fab fa-github"></i> View on GitHub
+          </a>
+        </div>
       </div>
     </div>
   </section>
